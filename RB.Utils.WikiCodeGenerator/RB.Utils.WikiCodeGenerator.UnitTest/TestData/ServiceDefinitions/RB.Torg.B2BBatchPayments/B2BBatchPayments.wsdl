@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:pws="http://rb.b2b.is/schema/batchpayments/2012/06/01"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:ct="http://rb.b2b.is/schema/commontypes/2012/06/01"
+             targetNamespace="http://rb.b2b.is/schema/batchpayments/2012/06/01">
+  <types>
+    <xs:schema>
+      <xs:import schemaLocation="B2BBatchPaymentsMessages.xsd" namespace="http://rb.b2b.is/schema/batchpayments/2012/06/01" />
+    </xs:schema>      
+  </types>
+
+  <message name="AddPaymentsSoapIn">
+    <part name="parameters" element="pws:AddPayments"/>
+  </message>
+  <message name="AddPaymentsSoapOut">
+    <part name="parameters" element="pws:AddPaymentsResponse"/>
+  </message>
+
+  <message name="AlterBatchSoapIn">
+    <part name="parameters" element="pws:AlterBatch"/>
+  </message>
+  <message name="AlterBatchSoapOut">
+    <part name="parameters" element="pws:AlterBatchResponse"/>
+  </message>
+
+  <message name="AlterPaymentSoapIn">
+    <part name="parameters" element="pws:AlterPayment"/>
+  </message>
+  <message name="AlterPaymentSoapOut">
+    <part name="parameters" element="pws:AlterPaymentResponse"/>
+  </message>
+
+  <message name="CreateBatchSoapIn">
+    <part name="parameters" element="pws:CreateBatch"/>
+  </message>
+  <message name="CreateBatchSoapOut">
+    <part name="parameters" element="pws:CreateBatchResponse"/>
+  </message>
+
+  <message name="CreateScheduleBatchSoapIn">
+    <part name="parameters" element="pws:CreateScheduleBatch"/>
+  </message>
+  <message name="CreateScheduleBatchSoapOut">
+    <part name="parameters" element="pws:CreateScheduleBatchResponse"/>
+  </message>
+
+  <message name="DeleteBatchSoapIn">
+    <part name="parameters" element="pws:DeleteBatch"/>
+  </message>
+  <message name="DeleteBatchSoapOut">
+    <part name="parameters" element="pws:DeleteBatchResponse"/>
+  </message>
+
+  <message name="DeletePaymentSoapIn">
+    <part name="parameters" element="pws:DeletePayment"/>
+  </message>
+  <message name="DeletePaymentSoapOut">
+    <part name="parameters" element="pws:DeletePaymentResponse"/>
+  </message>
+
+  <message name="EchoSoapIn">
+    <part name="parameters" element="pws:Echo"/>
+  </message>
+  <message name="EchoSoapOut">
+    <part name="parameters" element="pws:EchoResponse"/>
+  </message>
+
+  <message name="GetBatchSoapIn">
+    <part name="parameters" element="pws:GetBatch"/>
+  </message>
+  <message name="GetBatchSoapOut">
+    <part name="parameters" element="pws:GetBatchResponse"/>
+  </message>
+
+  <message name="GetBatchesSoapIn">
+    <part name="parameters" element="pws:GetBatches"/>
+  </message>
+  <message name="GetBatchesSoapOut">
+    <part name="parameters" element="pws:GetBatchesResponse"/>
+  </message>
+
+  <message name="GetBatchStatisticsSoapIn">
+    <part name="parameters" element="pws:GetBatchStatistics"/>
+  </message>
+  <message name="GetBatchStatisticsSoapOut">
+    <part name="parameters" element="pws:GetBatchStatisticsResponse"/>
+  </message>
+
+  <message name="GetPaymentSoapIn">
+    <part name="parameters" element="pws:GetPayment"/>
+  </message>
+  <message name="GetPaymentSoapOut">
+    <part name="parameters" element="pws:GetPaymentResponse"/>
+  </message>
+
+  <message name="ProcessBatchSoapIn">
+    <part name="parameters" element="pws:ProcessBatch"/>
+  </message>
+  <message name="ProcessBatchSoapOut">
+    <part name="parameters" element="pws:ProcessBatchResponse"/>
+  </message>
+
+  <message name="ReuseBatchSoapIn">
+    <part name="parameters" element="pws:ReuseBatch"/>
+  </message>
+  <message name="ReuseBatchSoapOut">
+    <part name="parameters" element="pws:ReuseBatchResponse"/>
+  </message>
+
+  <message name="ValidateBatchSoapIn">
+    <part name="parameters" element="pws:ValidateBatch"/>
+  </message>
+  <message name="ValidateBatchSoapOut">
+    <part name="parameters" element="pws:ValidateBatchResponse"/>
+  </message>
+
+  <message name="CustomFaultExceptionSoapOut">
+    <part name="error" element="pws:CustomFaultException"/>
+  </message>
+
+  <portType name="BatchPayments">
+    <operation name="AddPayments">
+      <xs:annotation>
+        <xs:documentation xml:lang="en">Hello world!</xs:documentation>
+        <xs:documentation xml:lang="is">Halló heimur!</xs:documentation>
+      </xs:annotation>
+      <input message="pws:AddPaymentsSoapIn"/>
+      <output message="pws:AddPaymentsSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+    <operation name="AlterBatch">
+      <input message="pws:AlterBatchSoapIn"/>
+      <output message="pws:AlterBatchSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+    <operation name="AlterPayment">
+      <input message="pws:AlterPaymentSoapIn"/>
+      <output message="pws:AlterPaymentSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+    <operation name="CreateBatch">
+      <input message="pws:CreateBatchSoapIn"/>
+      <output message="pws:CreateBatchSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+    <operation name="CreateScheduleBatch">
+      <input message="pws:CreateScheduleBatchSoapIn"/>
+      <output message="pws:CreateScheduleBatchSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+    <operation name="DeleteBatch">
+      <input message="pws:DeleteBatchSoapIn"/>
+      <output message="pws:DeleteBatchSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+    <operation name="DeletePayment">
+      <input message="pws:DeletePaymentSoapIn"/>
+      <output message="pws:DeletePaymentSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+    <operation name="Echo">
+      <input message="pws:EchoSoapIn"/>
+      <output message="pws:EchoSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+    <operation name="GetBatch">
+      <input message="pws:GetBatchSoapIn"/>
+      <output message="pws:GetBatchSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+    <operation name="GetBatches">
+      <input message="pws:GetBatchesSoapIn"/>
+      <output message="pws:GetBatchesSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+    <operation name="GetBatchStatistics">
+      <input message="pws:GetBatchStatisticsSoapIn"/>
+      <output message="pws:GetBatchStatisticsSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+    <operation name="GetPayment">
+      <input message="pws:GetPaymentSoapIn"/>
+      <output message="pws:GetPaymentSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+    <operation name="ProcessBatch">
+      <input message="pws:ProcessBatchSoapIn"/>
+      <output message="pws:ProcessBatchSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+    <operation name="ReuseBatch">
+      <input message="pws:ReuseBatchSoapIn"/>
+      <output message="pws:ReuseBatchSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+    <operation name="ValidateBatch">
+      <xs:annotation>
+        <xs:documentation xml:lang="en">Hello world!</xs:documentation>
+        <xs:documentation xml:lang="is">Halló heimur!</xs:documentation>
+      </xs:annotation>
+      <input message="pws:ValidateBatchSoapIn"/>
+      <output message="pws:ValidateBatchSoapOut"/>
+      <fault name="error" message="pws:CustomFaultExceptionSoapOut"/>
+    </operation>
+  </portType>
+
+  <binding name="BatchPayments" type="pws:BatchPayments">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="AddPayments">
+      <soap:operation soapAction="http://rb.b2b.is/schema/batchpayments/2012/06/01/AddPayments" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="AlterBatch">
+      <soap:operation soapAction="http://rb.b2b.is/schema/batchpayments/2012/06/01/AlterBatch" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="AlterPayment">
+      <soap:operation soapAction="http://rb.b2b.is/schema/batchpayments/2012/06/01/AlterPayment" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="DeleteBatch">
+      <soap:operation soapAction="http://rb.b2b.is/schema/batchpayments/2012/06/01/DeleteBatch" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="DeletePayment">
+      <soap:operation soapAction="http://rb.b2b.is/schema/batchpayments/2012/06/01/DeletePayment" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="Echo">
+      <soap:operation soapAction="http://rb.b2b.is/schema/accounts/2012/06/01/Echo" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="CreateBatch">
+      <soap:operation soapAction="http://rb.b2b.is/schema/batchpayments/2012/06/01/CreateBatch" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="CreateScheduleBatch">
+      <soap:operation soapAction="http://rb.b2b.is/schema/batchpayments/2012/06/01/CreateScheduleBatch" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="GetBatch">
+      <soap:operation soapAction="http://rb.b2b.is/schema/batchpayments/2012/06/01/GetBatch" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="GetBatches">
+      <soap:operation soapAction="http://rb.b2b.is/schema/batchpayments/2012/06/01/GetBatches" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="GetBatchStatistics">
+      <soap:operation soapAction="http://rb.b2b.is/schema/batchpayments/2012/06/01/GetBatchStatistics" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="GetPayment">
+      <soap:operation soapAction="http://rb.b2b.is/schema/batchpayments/2012/06/01/GetPayment" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="ProcessBatch">
+      <soap:operation soapAction="http://rb.b2b.is/schema/batchpayments/2012/06/01/ProcessBatch" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="ReuseBatch">
+      <soap:operation soapAction="http://rb.b2b.is/schema/batchpayments/2012/06/01/ReuseBatch" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="ValidateBatch">
+      <soap:operation soapAction="http://rb.b2b.is/schema/batchpayments/2012/06/01/ValidateBatch" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault name="error" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+
+  <service name="BatchPaymentsService">
+    <port name="BatchPayments" binding="pws:BatchPayments">
+      <soap:address location="https://rb.b2b.is/batchpayments.svc"/>
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,8 @@
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator\RB.Utils.WikiCodeGenerator\bin\Debug\RB.Utils.WikiCodeGenerator.dll.config
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator\RB.Utils.WikiCodeGenerator\bin\Debug\RB.Utils.WikiCodeGenerator.dll
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator\RB.Utils.WikiCodeGenerator\bin\Debug\RB.Utils.WikiCodeGenerator.pdb
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator\RB.Utils.WikiCodeGenerator\bin\Debug\ConfluenceSoapServiceService.dll
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator\RB.Utils.WikiCodeGenerator\bin\Debug\RB.BLL.Dictionary.dll
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator\RB.Utils.WikiCodeGenerator\bin\Debug\RB.BLL.Dictionary.pdb
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator\RB.Utils.WikiCodeGenerator\obj\Debug\RB.Utils.WikiCodeGenerator.dll
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator\RB.Utils.WikiCodeGenerator\obj\Debug\RB.Utils.WikiCodeGenerator.pdb

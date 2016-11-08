@@ -1,0 +1,1843 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://rb.b2b.is/schema/accounts/2012/06/01" xmlns:at="http://rb.b2b.is/schema/accounts/2012/06/01" xmlns:ct="http://rb.b2b.is/schema/commontypes/2012/06/01" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" id="CommonTypes">
+  <xs:import namespace="http://rb.b2b.is/schema/commontypes/2012/06/01" schemaLocation="B2BTypes.xsd"/>
+
+<!--GetAccountStatementQuery-->
+  
+  <xs:complexType name="GetAccountStatementQuery">
+    <xs:sequence>
+      <xs:element name="AgreementId" type="ct:AccountID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The account information is requested for.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Reikningsnúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TransactionDateFrom" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">From date.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Dagsetning frá og með.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TransactionDateTo" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">To date.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Dagsetning til og með.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AmountFrom" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Amount from.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upphæð frá.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AmountTo" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Amount to.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upphæð til.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SearchText" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Search text.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Leitar strengur</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="StatementType" type="at:StatementType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Hvat kind of transactions.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Hvað á að skila, öllum færslum, bara innborgunum, bara útborgunum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Paging" type="at:Paging">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Used to limit the records in the response to a certain range.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Notað til að takmarka fjölda færslna í svari.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Ordering" type="at:Ordering">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Dálkurinn sem á að raða eftir.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Paging" >
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US"></xs:documentation>
+      <xs:documentation xml:lang="is-IS">Upplýsingar fyrir paging.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Page" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Blaðsíðan sem á að birta.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PageSize" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Fjöldi færslna á hverri blaðsíðu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Ordering">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US"></xs:documentation>
+      <xs:documentation xml:lang="is-IS">Listi af svæðum sem á að raða eftir.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Order" type="at:OrderBy" maxOccurs="100"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="OrderBy" >
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US"></xs:documentation>
+      <xs:documentation xml:lang="is-IS">Dálkurinn sem á að raða eftir.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+    <xs:element name="ColumnName" type="xs:string">
+      <xs:annotation>
+        <xs:documentation xml:lang="en-US"></xs:documentation>
+        <xs:documentation xml:lang="is-IS">Heiti svæðis sem á að raða eftir.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Direction" type="at:SortDirection" default="Desc">
+      <xs:annotation>
+        <xs:documentation xml:lang="en-US"></xs:documentation>
+        <xs:documentation xml:lang="is-IS">Attribute sem segir til um hvort þetta er hækkkandi eða lækkandi röð.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:simpleType name="SortDirection">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Asc" >
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Ascending Order. Arranged from smallest to largest.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Hækkandi röð.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Desc">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Desending Order. Arranged from largest to smallest.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Lækkandi röð.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="StatementType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="All">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">All transaction.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Allar færslur, bæði innborganir og útborganir, hvaðan sem þær koma.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Deposits">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Deposits.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Innborganir.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Withdrawals">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Withdrawals.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Útborganir.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Debetcard">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Transaction from the debetcards.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Greiðslur með debetkorti.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Internetbank">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Payments done in the internetbank.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Greiðlur gerði í netbankanum.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!--GetAccountStatementResult-->
+
+  <xs:complexType name="GetAccountStatementResult">
+    <xs:sequence>
+      <xs:element name="AccountStatement" type="at:AccountStatement" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upplysingar um reikning ásamt færslum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PagingInfo" type="at:PagingInfo"  minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Samtals færslur fyrir þetta leitarskilyrði, notað til að teikna upp page-ing.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AccountStatement">
+    <xs:sequence>
+      <xs:element name="AgreementId" type="ct:AccountID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The ID of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Reikningur.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Currency" type="ct:CurrencyCode">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The currency of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Mynt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OverdraftAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Overdraft permission.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Yfirdráttarheimild.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BalanceAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The balance of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Staða reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AvailableAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The amount available to the account holder.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Til ráðstöfunar.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Status" type="ct:Status">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The status of the account (open/closed).</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Ástand reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TotalAmountWaiting" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The total amount of transactions waiting that exceeded amount available.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Heildarupphæð innistæðulausra úttekta.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IBAN" type="ct:IBAN">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">IBAN Number.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">IBAN númer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CustomAccountName" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Name set by account owner.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Nafn sett af reikningseiganda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="FinancialEvents" type="at:FinancialEvents" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Account transaction list.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Reikningsyfirlitið sjálft.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="FinancialEvents" >
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US"></xs:documentation>
+      <xs:documentation xml:lang="is-IS">List af financials events færslum.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="FinancialEvents" type="at:FinancialEvent" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS"></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="FinancialEvent">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Account Transaction.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Upplýsingar um staka Financials event færslu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="EventId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Uniquely identifies this transaction with the originating system.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Einkennisnúmer færslu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EventTimeStamp" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The date when this transaction was booked.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Bókunardagur, hreyfingardagur.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ValueDate" type="xs:date" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Value Date.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Vaxtadags.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BatchNumber" type="ct:BatchNumber">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Batch Identifier.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Bunkanúmer. RB bunkanúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RedeemingBank" type="ct:Bank">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The bank where the transaction originated.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Innlausnarbanki.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TransactionCode" type="ct:Transaction">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Transaction Key.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Færslulykill.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TransactionNumber" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Færslunúmer (FANR).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Reference" type="ct:Reference" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Reference.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Tilvísun.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ReferenceLong" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Löng tilvísun.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BillNumber" type="ct:BillNumber" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Bill number.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Seðilinúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CategoryCode" type="ct:CategoryCode">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Category code</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Textalykill.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Category" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Expands on the category code and gives the fulltext explanation.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Skýring textalykils.  Lengri skýring textalykils sem til er í kerfunum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ReferenceDescription" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Expands on the information in the reference, usually by trying to matching the information entered with person identification numbers.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Skýring tilvísunar.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PayorId" type="ct:PersonID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Person ID of payor.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Kennitala greiðanda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ExternalId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Ytra id sem vv getur hengt á færsluna.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Amount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Amount.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upphæð.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BalanceAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The balance of the account after this transaction.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Staða eftir færslu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CurrencyId" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Mynt reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AmountLcy" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upphæð í ISK</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DueDate" type="xs:date" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Gjalddagi.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BenefactorId" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Kennitala móttakanda(KTGR eða SUBSTR(TILV,1,10) í AH).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EvnetGroupId" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">MillifærsluId, Id á móthreyfingu sem myndar Inn og út.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PagingInfo" >
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US"></xs:documentation>
+      <xs:documentation xml:lang="is-IS">upplýsingar um paging út frá því sem var sent inn.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Page" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Blaðsíðan sem á að birta.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PageSize" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Fjöldi færslna á hverri blaðsíðu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TotalRows" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS"> Heildarfjöldi færslna í fyrirspurninni.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TotalPages" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Heildafjöldi blaðsíðna í fyrirspurninni.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+
+
+  <!--<xs:complexType name="AccountTransactionArray">
+    <xs:sequence>
+      <xs:element name="Transaction" type="at:AccountTransaction" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>-->
+
+  <!-- *****************************************************************  -->
+
+  <!--<xs:complexType name="AccountTransactionDetail">
+    <xs:sequence>
+      <xs:element name="Account" type="ct:AccountID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The ID of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Reikningur.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>-->
+
+  <xs:complexType name="AccountStatementDetail">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Account Transaction detail.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Nánari upplýsingar um staka Financials event færslu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="WithdrawalAccount" type="at:AccountMinimalInfo">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Information about the account from which funds will be drawn.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upplýsingar um úttektarreikning.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DepositingAccount" type="at:AccountMinimalInfo">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Information about the account to which funds will be transferred.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upplýsingar um innleggsreikning.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EventTimeStamp" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The date when this transaction was booked.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Bókunardagur, hreyfingardagur.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ValueDate" type="xs:date" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Value Date.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Vaxtadags.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BatchNumber" type="ct:BatchNumber">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Batch Identifier.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Bunkanúmer. RB bunkanúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TransactionCode" type="ct:Transaction">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Transaction Key.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Færslulykill.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TransactionNumber" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Færslunúmer (FANR).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Reference" type="ct:Reference" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Reference.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Tilvísun.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ReferenceLong" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Löng tilvísun.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BillNumber" type="ct:BillNumber" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Bill number.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Seðilinúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CategoryCode" type="ct:CategoryCode">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Category code</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Textalykill.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Category" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Expands on the category code and gives the fulltext explanation.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Skýring textalykils.  Lengri skýring textalykils sem til er í kerfunum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ReferenceDescription" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Expands on the information in the reference, usually by trying to matching the information entered with person identification numbers.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Skýring tilvísunar.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ExternalId" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Ytra id sem vv getur hengt á færsluna.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Amount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Amount.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upphæð.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Balance" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The balance of the account after this transaction.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Staða eftir færslu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CurrencyId" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Mynt reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AmountLcy" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upphæð í ISK</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DueDate" type="xs:date" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Gjalddagi.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>  
+
+  <xs:complexType name="GetAccountStatementDetailQuery">
+    <xs:sequence>
+      <xs:element name="EventId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetAccountStatementDetailResult">
+    <xs:sequence>
+      <xs:element name="AccountStatementDetail" type="at:AccountStatementDetail">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upplysingar um reikning ásamt færslum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AccountDetailInfo">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="AH" type="at:AHAccountExtraInfo"/>
+        <xs:element name="SP" type="at:SPAccountExtraInfo"/>
+        <xs:element name="IG" type="at:IGAccountExtraInfo"/>
+      </xs:choice>
+      <xs:element name="AccountID" type="ct:AccountID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The ID of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Reikningur.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AccountOwner" type="at:AccountOwnerInfo">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Information about the account owner.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upplýsingar um reikningseiganda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ExtraPersons" type="at:AccountExtraPerson" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Person ID of the account owner.list</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Inniheldur lista af aukakennitölum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Currency" type="ct:CurrencyCode">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The currency of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Mynt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IBAN" type="ct:IBAN">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">International Bank Account Number.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Alþjóðlegt bankareikningsnúmer (International Bank Account Number).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Swift" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Swift Number.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Swift númer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Balance" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The balance of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Staða reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="LastTransactions" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Síðasta færsla.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Interest" type="ct:Percentage2">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Inn vaxta prósenta.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="InterestAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Innvextir upphæð.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AccountName" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Official name of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Markaðsheiti reiknings út frá vaxtaflokki.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AccountType" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Tegund reiknings</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Status" type="ct:Status">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The status of the account (open/closed).</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Ástand reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CustomAccountName" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Name set by user. Only displayed for user.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Nafn sett af notanda. Einungis birt fyrir notanda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AvarageBalance" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Meðalstaða.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Turnover" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Velta ársis frá áramótum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NumberOfTransactions" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Fjöldi hreyfinga</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NumberOfDeposits" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Fjöldi innborgana</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NumberOfFreeDebitEntries" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Friar debitfærslur</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DebitEntriesUsed" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">fjöldi debitfærsla notaðar</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PrintingOption" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Útskrift</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+
+      <!--<xs:element name="AvailableAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The amount available to the account holder.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Til ráðstöfunar.</xs:documentation>
+        </xs:annotation>
+      </xs:element>-->
+
+      <!--<xs:element name="TotalAmountWaiting" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The total amount of transactions waiting that exceeded amount available.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Heildarupphæð innistæðulausra úttekta.</xs:documentation>
+        </xs:annotation>
+      </xs:element>-->
+
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="AccountExtraPerson">
+    <xs:sequence>
+      <xs:element name="ExtraPersonID" type="ct:PersonID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Person ID of the account owner.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Auka kennitala</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ExtraPersonsName " type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS"> Nafn aukakennitölu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ExtraPersonType " type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Tegund aukakennitölu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+
+    </xs:sequence>
+  </xs:complexType>  
+  <xs:complexType name="AHAccountExtraInfo">
+    <xs:sequence>
+      <xs:element name="OverdraftValidFrom" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Heimild gildir frá.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OverdraftValidTo" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Heimild gildir til.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Overdraft" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Overdraft permission.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Yfirdráttarheimild.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DebtInterest" type="ct:Percentage2">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Skuldavxta prósenta.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DebtInterestAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Skuldavextir upphæð.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DateIncrementalPartition1" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS"></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AmountIncrementalPartition1" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS"></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DateIncrementalPartition2" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS"></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AmountIncrementalPartition2" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS"></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+
+    </xs:sequence>
+
+  </xs:complexType>
+
+  <xs:complexType name="SPAccountExtraInfo">
+    <xs:sequence>
+      <xs:element name="AvailabelAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Laus upphæð.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NextAvailabelAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Laus upphæð næst.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DateNextAvailableAmount" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Luas fjárhæð næst þann.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Index" type="ct:Percentage4">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Vísitala óverðtryggt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NumberOfCalculationOfInterest" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upplýsingar um vaxtaútr. (fj ári)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+
+      <xs:element name="DateIncrementalPartition1" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS"></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AmountIncrementalPartition1" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS"></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DateIncrementalPartition2" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS"></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AmountIncrementalPartition2" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS"></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+
+  </xs:complexType>
+
+  <xs:complexType name="IGAccountExtraInfo">
+    <xs:sequence>
+      <xs:element name="AvailabelAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Laus upphæð.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NextAvailabelAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Laus upphæð næst.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DateNextAvailableAmount" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Luas fjárhæð næst þann.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+
+    </xs:sequence>
+  </xs:complexType>
+
+
+
+  <!-- ********************************************************************  -->
+
+
+  <xs:complexType name="AccountInfo">
+    <xs:sequence>
+      <xs:element name="Account" type="ct:AccountID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The ID of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Reikningur.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Currency" type="ct:CurrencyCode">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The currency of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Mynt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Overdraft" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Overdraft permission.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Yfirdráttarheimild.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Balance" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The balance of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Staða reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AvailableAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The amount available to the account holder.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Til ráðstöfunar.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Status" type="ct:Status">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The status of the account (open/closed).</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Ástand reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TotalAmountWaiting" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The total amount of transactions waiting that exceeded amount available.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Heildarupphæð innistæðulausra úttekta.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IBAN" type="ct:IBAN">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">IBAN Number.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">IBAN númer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AccountOwnerID" type="ct:PersonID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">IBAN Number.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Kennitala eiganda reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AccountName" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Official name of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Markaðsheiti reiknings út frá vaxtaflokki.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CustomAccountName" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Name set by user. Only displayed for user.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Nafn sett af notanda. Einungis birt fyrir notanda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AccountIDCollection">
+    <xs:sequence>
+      <xs:element name="AccountID" type="ct:AccountID" maxOccurs="100">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Account number.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">12 stafa reikningsnúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+
+
+  <xs:complexType name="PrintingFrequencyCollection">
+    <xs:sequence>
+      <xs:element name="PrintingFrequencyValue" type="at:PrintingFrequencyValue" maxOccurs="100">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"> Listi af mögulegum gildum fyrir tíðni útprentunar reikningsyfirlita.</xs:documentation>
+          <xs:documentation xml:lang="is-IS"> Listi af mögulegum gildum fyrir tíðni útprentunar reikningsyfirlita.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="PrintingFrequencyValue" >
+      <xs:sequence>
+        <xs:element name="Type" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">PrintingFrequencyType.</xs:documentation>
+          <xs:documentation xml:lang="is-IS"> Vallistagildi sem einkennir tíðni prentunar á reikningsyfirlitum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Printing Frequency Description.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Lýsing á tíðni,  t.d. daglega, mánaðarlega.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetAccountsResult">
+    <xs:sequence>
+      <xs:element name="Accounts" type="at:AccountInfoCollection" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">List of accounts.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Listi af reikningsupplýsingum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Errors" type="at:AccountErrorCollection" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">List of accounts that could not be returned and the reason.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Listi yfir þá reikninga sem var ekki hægt að sækja og ástæðuna fyrir því.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetUnusedAccountIdsResult">
+    <xs:sequence>
+      <xs:element name="LowestAccountId" type="ct:AccountID" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Lowest value in the number series regardless of whether it is in use.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Lægsta gildi í tilheyrandi reikningsnúmeraseríu óháð því hvort það sé í notkun.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="HighestAccountId" type="ct:AccountID" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Highest value in the number series regardless of whether it is in use.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Hæsta gildi í tilheyrandi reikningsnúmeraseríu óháð því hvort það sé í notkun.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ProductCode" type="ct:ProductCode" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Interest rate code for recieved accountIds.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Vaxtaflokkur fyrir sótt reikningsnúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AccountIds" type="at:AccountIDCollection" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">List of unused accountIds.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Listi af lausum reikningsnúmerum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+        <xs:element name="TotalRows" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation xml:lang="en-US">Count of unused accountIds returned.</xs:documentation>
+            <xs:documentation xml:lang="is-IS">Fjöldi af lausum reikningsnúmerum sem er skilað.</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:integer">
+              <xs:minInclusive value="1"/>
+              <xs:maxInclusive value="100"/>
+            </xs:restriction>
+          </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AccountErrorCollection">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">List of accounts and errors regarding them.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Listi yfir reikninga og villur tengdar þeim.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Error" type="at:AccountError" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">List of accounts and errors regarding them.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Listi yfir reikninga og villur tengdar þeim.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AccountError">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">AccountId and error associated whith the account.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Reikningsnúmer og villa tengd honum.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AccountID" type="ct:AccountID"/>
+      <xs:element name="Error" type="at:Error">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Error information associated with the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Villu upplýsingar sem tengjast reikningi.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Error">
+    <xs:sequence>
+      <xs:element name="Code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Error code.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Villunúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Message" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Error text.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Villutexti.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetUserAccountsResult">
+    <xs:sequence>
+      <xs:element name="Accounts" type="at:AccountInfoCollection">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">List of accounts.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Listi af reikningsupplýsingum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AccountInfoCollection">
+    <xs:sequence>
+      <xs:element name="Account" type="at:AccountInfo" maxOccurs="100"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetAccountsQuery">
+    <xs:sequence>
+      <xs:element name="AccountIDs" type="at:AccountIDCollection"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetUserAccountsQuery">
+    <xs:sequence>
+      <xs:element name="PersonID" type="ct:PersonID" minOccurs="0"/>
+      <xs:element name="Status" type="at:AccountStatusFilter" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Used to filter accounts based on the account status. For example only open accounts.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Notað til að filtera reikninga eftir ástandi.  Til dæmis sækja bara reikninga sem eru opnir.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AccessFilter" type="at:AccountAccessFilter" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Used to filter accounts based on access rights. For example only accounts that can be withdrawn from.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Notað til að filtera reikninga eftir aðgangi.  Til dæmis sækja bara reikninga sem má taka útaf.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetUnusedAccountIdsQuery">
+    <xs:sequence>
+      <xs:element name="ProductCode" type="ct:ProductCode" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Interest rate code for the accountIds that are being searched.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Vaxtaflokkur fyrir þau reikningsnúmer sem leitað er að.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MaxCount" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Number of unused accountIds that are being searched.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Fjöldi lausra reikningsnúmera sem leitað er að.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="100"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="FromAccountId" type="ct:AccountID" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Lowest AccountId to search for.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Lægsta reikningsnúmer sem leitað er að.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="AccountStatusFilter">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Status filter for accounts.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Ástandsfilter fyrir reikninga.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Open"/>
+      <xs:enumeration value="Closed"/>
+      <xs:enumeration value="All"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AccountAccessFilter">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Access filter for accounts.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Aðgangsfilter fyrir reikninga.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Statement">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Accounts that can be viewed.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Reikningar sem má skoða.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Withdraw">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Accounts that can be withdrawn from.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Reikningar sem má taka út af.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="All">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">All accounts.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Allir reikningar óhað hvaða aðgang notandinn hefur að þeim.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="AccountOwnerInfo">
+    <xs:sequence>
+      <xs:element name="AccountOwnerID" type="ct:PersonID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">PersonID of the account owner.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Kennitala reikningseiganda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Name of the account owner.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Nafn reikningseiganda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Address" type="ct:AddressInfo">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Address used in sending of receipts.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Heimilisfang. Notað í sendingu kvittana.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DepositAccountQuery">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Query used to find information about the deposit account.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Leitarskilyrði notuð til að finna upplýsingar um reikning sem verið er að leggja inn á.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AccountID" type="ct:AccountID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The ID of the account being requested.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Númer bankareiknings sem verið er að leita að.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AccountOwnerID" type="ct:PersonID" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Person id for the owner of the account being requested.  If the person id is not the owner of the account the service will return an error.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Kennitala eiganda reiknings sem verið er að leita að.  Ef að kennitalan er ekki eigandi reiknings þá skilar þjónustan villu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DepositAccountInfo">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Information about the deposit account.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Upplýsingar um reikning sem verið er að leggja inn á.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AccountID" type="ct:AccountID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The ID of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Númer bankareiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AccountOwner" type="at:AccountOwnerInfo">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Information about the account owner.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upplýsingar um reikningseiganda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AccountMinimalInfo">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Information about the deposit account.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Upplýsingar um reikning sem verið er að leggja inn á.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AgreementId" type="ct:AccountID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The ID of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Númer bankareiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Owner" type="ct:NameAndId">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Information about the account owner.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upplýsingar um reikningseiganda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:complexType name="GetValueDateBalanceQuery">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US"></xs:documentation>
+      <xs:documentation xml:lang="is-IS">Fyrirspurn sem notuð er til að sækja upplýsingar um lokastöðu veltureiknings fyrir dag sem staðan breytist, án áunninna vaxta. Athuga ber að hreyfingar koma inn í lokastöðuna á vaxtadegi, ekki bókunardegi. </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AgreementId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The ID of the account being requested.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Númer bankareiknings sem verið er að leita að.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ValueDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Dagsetning lokiastöðu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="GetValueDateBalanceResult">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US"></xs:documentation>
+      <xs:documentation xml:lang="is-IS">Svar við fyrirspurn sem notuð er til að sækja upplýsingar um lokastöðu reiknings fyrir ákveðinn dag,  að teknu tilliti til vaxtadags hreyfinga.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+       <xs:element name="ValueDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS"> Dagsetningu stöðubreytingar að teknu tilliti til vaxtadags hreyfinga.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ValueDateBalanceAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Lokastaða reiknings fyrir dag sem spurt er um.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="NewAccount">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Information for the new account.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Upplýsingar um reikning sem á að stofna.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AgreementId" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Accountnumber.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Reikningsnúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OwnerId" type="ct:PersonID" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Person id of the account owner.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Kennitala eiganda reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ProductCode" type="ct:ProductCode" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Interest rate code for the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Vaxtaflokkur reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CAD" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Current Account Deficit risk.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Áhættuprósenta.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="199"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Currency" type="ct:CurrencyCode" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">The currency of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Mynt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:complexType name="AlterAccount">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Changing account</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Breyting á öllum tegundum innlánsreikninga..</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AgreementId" type="ct:AccountID" minOccurs="1" >
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Accountnumber.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Reikningsnúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!--<xs:element name="OwnerId" type="ct:PersonID" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Person id of the account owner.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Kennitala eiganda reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>-->
+      
+      <xs:choice>
+        <xs:element  name="OwnerId" type="ct:PersonID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Person Id.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Kennitala</xs:documentation>
+        </xs:annotation>
+        </xs:element>
+        <xs:element  name="NameReference" type="ct:PersonID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Name reference (fyrst 6 characters in owner's name).</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Nafnstafir   (fyrstu 6 stafir í nafni reikningseiganda)  (á aðeins við sparireikninga sem ekki eru með skráða kennitölu).</xs:documentation>
+        </xs:annotation>
+        </xs:element>
+      </xs:choice>
+     
+      <xs:element name="OwnerType" type="at:OwnerType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Owner type.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Tegund Reikningseiganda. -  Ekki útfært fyrir reikninga með höfuðbók 38.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!--<xs:element name="PrintingOptionCode" type="ct:PrintingOption" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Frequency of AccountStatements.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Tíðni útskrifta á reikningsyfirlitum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>-->
+    
+      <xs:element name="MessageCode"  minOccurs="0" >
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Message code</xs:documentation>
+          <xs:documentation xml:lang="is-IS"> 2ja stafa lykill fyrir skilaboð sem fylgja reikningi.   Oft kallað boðlykill.   </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="99"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <!--PostalHandlingCode
+      //SortingOrderKey-->
+      <xs:element name="InterestRate" type="ct:Percentage2" minOccurs="0" >
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Interest</xs:documentation>
+          <xs:documentation xml:lang="is-IS"> Innvextir.  Taka gildi við næsta vaxtaútreikning eða á næsta vaxtabreytingardegi eftir því sem við á. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+     
+      <xs:element name="PrintingFrequencyCode" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Frequency of printing account statements.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Tíðni útskrifta á reikningsyfirlitum. Gildi lesin úr þjónustunni  GetStatementPrintingFrequency</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+       <xs:choice>
+        <xs:element name="AHAlterAccountExtraInfo" type="at:AHAlterAccountExtraInfo" minOccurs="0" />
+        <xs:element name="SPAlterAccountExtraInfo" type="at:SPAlterAccountExtraInfo" minOccurs="0" />
+        <xs:element name="IGAlterAccountExtraInfo" type="at:IGAlterAccountExtraInfo" minOccurs="0" />
+       </xs:choice>
+      </xs:sequence>
+      </xs:complexType>
+
+
+  <xs:complexType name="OwnerIdType">                        
+    <xs:sequence>
+      <xs:element name="OwnerId" type="ct:PersonID" minOccurs="0" >
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Person id of the account owner.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Kennitala eiganda reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="OwnerNameReferenceType">
+    <xs:sequence>
+       <xs:element name="NameReference" type="xs:string" minOccurs="0" >
+        <xs:annotation>
+            <xs:documentation xml:lang="en-US"></xs:documentation>
+            <xs:documentation xml:lang="is-IS">Nafnstafir (fyrstu 6 stafir í nafni reikningseiganda)  (á aðeins við sparireikninga sem ekki eru með skráða kennitölu)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="AHAlterAccountExtraInfo">
+   <xs:sequence>
+      <xs:element name="InterestCategoryCode" type="xs:string" minOccurs="0" >
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Interest rate code for the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Vaxtaflokkur reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ChargeCategoryCode" type="xs:string" minOccurs="0" >
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Charge code.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Gjaldaflokkur reiknings. Segir til um hvað gjaldfært er.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CAD" minOccurs="0" >
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Current Account Deficit risk.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">3ja stafa tala fyrir áhættuflokk reiknings.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="199"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+
+      <xs:element name="PayableInterestRate" type="ct:Percentage2" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Payable interest</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Skuldavextir.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    
+      <xs:element name="IsNonRestrictedWithdrawal" type="xs:boolean" minOccurs="0" >
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Transaction always allowed</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Alltaf má bóka úttekt þótt innistæða sé ekki næg. (Frjáls bókun).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      
+      <xs:element name="LegalCouncelCode" type="xs:string" minOccurs="0" >
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Code for lawyers.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Vísun í lögfræðing (sem sér um innheimtu skuldar)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      
+        </xs:sequence>
+
+  </xs:complexType>
+
+
+  <xs:complexType name="SPAlterAccountExtraInfo">
+   
+          <xs:sequence>
+
+            <xs:element name="HasNotWithdrawalFee "  type="xs:boolean" minOccurs="0" >
+              <xs:annotation>
+                <xs:documentation xml:lang="en-US">Withdrawal fee is charged.</xs:documentation>
+                <xs:documentation xml:lang="is-IS">Ekki tekið útttektargjald við úttekt.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+
+            <xs:element name="WithdrawalLimitation" type="at:WithdrawalLimitation" minOccurs="0" >
+              <xs:annotation>
+                <xs:documentation xml:lang="en-US">Withdrawal restrictions</xs:documentation>
+                <xs:documentation xml:lang="is-IS">Takmörkuð úttekt.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+
+            <xs:element name="IsRegularSavings" type="xs:boolean" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation xml:lang="en-US">Regular savings</xs:documentation>
+                <xs:documentation xml:lang="is-IS">Reglulegur sparnaður (stýrir bindireglu).</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+
+            <!--Bókartýpur-->
+            <!--<xs:element name="Book" type="xs:int" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Code for lawyers.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Fyrir bókarreikninga  - athuga betur</xs:documentation>
+        </xs:annotation>
+      </xs:element>-->
+            <xs:element name="DepositingAccount" type="ct:AccountID" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation xml:lang="en-US">Depositing Account.</xs:documentation>
+                <xs:documentation xml:lang="is-IS">Ráðstöfunarreikningur 12 stafa reikningsnúmer.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            
+          </xs:sequence>
+      
+  </xs:complexType>
+  <xs:complexType name="IGAlterAccountExtraInfo">
+      <xs:sequence>
+        <xs:element name="TimeDepositRuleCode" type="at:TimeDepositRuleCode" minOccurs="0" >
+          <xs:annotation>
+            <xs:documentation xml:lang="en-US">Binding Code.</xs:documentation>
+            <xs:documentation xml:lang="is-IS">Segir til um binditímareiknings ef hann fylgir ekki vaxtareglu.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>   
+  </xs:complexType>
+
+  <xs:complexType name="CreateAccountResult">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Information about the created account.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Upplýsingar um stofnaðan reikning.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AgreementId" type="ct:AccountID" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Accountnumber.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Reikningsnúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Owner" type="ct:NameAndId" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Account owner information</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Upplýsingar um reikningseiganda</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Interest" type="ct:Percentage2" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Interest.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Innvextir.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DebtInterest" type="ct:Percentage2" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">DebtInterest.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Útvextir</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AccountName" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Official name of the account.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Markaðsheiti reiknings út frá vaxtaflokki.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CurrencyName" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Currency name.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Heiti myntar á reikning.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlterAccountResult">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Information about the created account.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Upplýsingar um stofnaðan reikning.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AgreementId" type="ct:AccountID" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Accountnumber.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Reikningsnúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>    
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetPrintingFrequencyQuery">
+    <xs:sequence>
+      <xs:element name="AgreementId" type="ct:AccountID" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">AgreementId; bank, ledger, AccountNumber.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Reikningsnúmerið; banki, höfuðbók og númer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetPrintingFrequencyResult">
+    <xs:sequence>
+      <xs:element name="PrintingFrequencyValues" type="at:PrintingFrequencyCollection" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">List of PrintingFrequencyCodes></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Skilar lista yfir möguleg gildi fyrir útprentun reikningsyfirlita, mismunandi eftir tegund reiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!--Heimagerðar týpur-->
+  <xs:simpleType name ="SPBindingType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Bindiregla.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Bindiregla - segir til um binditímareiknings ef hann fylgir ekki vaxtareglu  .</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="LongerBindingTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">.</xs:documentation>
+          <xs:documentation xml:lang="is-IS"> binditími reikning er lengri en samkvæmt vaxtareglunni.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AllDepositsFreeTogether">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">allar innborganir fá sama lausnartíma,</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UseDefault">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"> .</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Binditími reiknings fylgir vaxtareglu.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--<xs:simpleType name ="IGBindingType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Bindiregla.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Bindiregla - segir til um binditímareiknings ef hann fylgir ekki vaxtareglu  .</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="3Months">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">3ja mánaða binditími</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="6Months">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">6 mánaða binditími</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>-->
+  <xs:simpleType name ="WithdrawalLimitation">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US"></xs:documentation>
+      <xs:documentation xml:lang="is-IS">Takmörkuð úttekt.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OnlyFreeAmount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Ekki má taka út af reikningi umfram lausa upphæð</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WithdrawalBanned">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS"> Lokað fyrir útborganir </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AllTransactionsBanned">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Lokað fyrir útborganir og innborganir</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoRestrictions">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Allt leyfilegt</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>      
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name ="OwnerType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US"></xs:documentation>
+      <xs:documentation xml:lang="is-IS">Reikningshafi</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BankEmployee">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Starfsmaður banka</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Others">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Aðrir</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name ="TimeDepositRuleCode">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Segir til um binditímareiknings ef hann fylgir ekki vaxtareglu.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Segir til um binditímareiknings ef hann fylgir ekki vaxtareglu.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="3months">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Binditími 3 mánuðir</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="6months">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Binditími 6 mánuðir</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>

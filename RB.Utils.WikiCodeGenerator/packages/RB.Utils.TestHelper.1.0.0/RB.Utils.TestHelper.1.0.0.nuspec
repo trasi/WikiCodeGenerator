@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>RB.Utils.TestHelper</id>
+    <version>1.0.0</version>
+    <title>RB.Utils.TestHelper</title>
+    <authors>Reiknistofa bankanna (Þursar)</authors>
+    <owners>RB</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Þessi NuGet-pakki inniheldur hjálparklasa vegna prófana hjá RB.</description>
+    <summary>Hjálparklasar vegna prófana.</summary>
+  </metadata>
+</package>

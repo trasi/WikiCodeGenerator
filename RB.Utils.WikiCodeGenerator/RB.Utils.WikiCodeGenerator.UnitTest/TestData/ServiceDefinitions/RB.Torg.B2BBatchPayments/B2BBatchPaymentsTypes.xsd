@@ -1,0 +1,1861 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:pt="http://rb.b2b.is/schema/batchpayments/2012/06/01"
+           xmlns:ct="http://rb.b2b.is/schema/commontypes/2012/06/01"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://rb.b2b.is/schema/batchpayments/2012/06/01"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           id="CommonTypes">
+  <xs:import namespace="http://rb.b2b.is/schema/commontypes/2012/06/01" schemaLocation="B2BTypes.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
+
+  <!-- viðföng get-aðgerða rb.torg.b2bbatchpayments (queries) ... -->
+  <xs:complexType name="GetBatchQuery">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Query used to retrieve a single batch.</xs:documentation>
+      <xs:documentation xml:lang="is">Leitarskilrði sem er notað til þess að sækja stakan bunka.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="BatchId" type="ct:OperationID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Batch ID.</xs:documentation>
+          <xs:documentation xml:lang="is">Bunkanúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetBatchesQuery">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Query used to search for batches.</xs:documentation>
+      <xs:documentation xml:lang="is">Leitarskilrði sem er notað til þess að leta að greiðslubunkum.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="BatchId" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Batch Number.</xs:documentation>
+          <xs:documentation xml:lang="is">Bunkanúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NameOfBatch" type="pt:NameOfBatch" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Batch name or part of it.</xs:documentation>
+          <xs:documentation xml:lang="is">Hluti eða allt nafn bunka.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="FromCreatedDate" type="xs:date" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Start date of a range of creation dates.</xs:documentation>
+          <xs:documentation xml:lang="is">Upphafsdagsetning leitar fyrir skráningardag.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ToCreatedDate" type="xs:date" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">End date of a range of creation dates.</xs:documentation>
+          <xs:documentation xml:lang="is">Lokadagsetning leitar fyrir skrániningardag.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Status" type="pt:Status" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Batch's statuses (more than one status may be specified).</xs:documentation>
+          <xs:documentation xml:lang="is">Segir til um hvaða staða eða stöður á að skila (fleiri en eitt gildi leyft).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Type" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Batch processing types (more than one type may be specified).</xs:documentation>
+          <xs:documentation xml:lang="is">Vinnslutegundir í svari (fleiri en ein tegund leyfð).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BookingType" type="pt:BookingType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Batch booking type (only one booking type may be specified).</xs:documentation>
+          <xs:documentation xml:lang="is">Bókunartegund bunka (bara ein bókunartegund leyfð).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WithdrawalChanged" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Batch withdrawal-change statuses (more than one status may be specified).</xs:documentation>
+          <xs:documentation xml:lang="is">Úttektarbreytingarstöður bunka (fleiri en eitt gildi leyft).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="FromValueDate" type="xs:date" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Start date of a range of value dates.</xs:documentation>
+          <xs:documentation xml:lang="is">Upphafsdagsetning leitar fyrir gildisdag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ToValueDate" type="xs:date" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">End date of a range of value dates.</xs:documentation>
+          <xs:documentation xml:lang="is">Lokadagsetning leitar fyrir gildisdag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CreatedBy" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Batch creator's User ID.</xs:documentation>
+          <xs:documentation xml:lang="is">Notendanafn bunkaskapara.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Bank" type="ct:Bank" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Batch's bank.</xs:documentation>
+          <xs:documentation xml:lang="is">Banki bunka.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetBatchStatisticsQuery">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Query used to retrieve a statistical information about a batch.</xs:documentation>
+      <xs:documentation xml:lang="is">Leitarskilrði sem er notað til þess að fá tölfræði upplýsingar bunka.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="BatchId" type="ct:OperationID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Batch ID.</xs:documentation>
+          <xs:documentation xml:lang="is">Bunkanúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetPaymentQuery">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Query used to retrieve a single payment.</xs:documentation>
+      <xs:documentation xml:lang="is">Leitarskilrði sem er notað til þess að sækja stakan greiðslu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="BatchId" type="ct:OperationID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Batch ID.</xs:documentation>
+          <xs:documentation xml:lang="is">Bunkanúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PaymentId" type="ct:OperationID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Payment ID.</xs:documentation>
+          <xs:documentation xml:lang="is">Greiðslunúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- tög vegna bunka og (bunka)greiðslna (í stafrófsröð, yður til hægðarauka) -->
+  <xs:complexType name="ABGiro">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Describes an ABGiro payment.</xs:documentation>
+      <xs:documentation xml:lang="is">ABGiro greiðslutegund er notað til þess að greiða AB-gíró seðla.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Account" type="ct:AccountID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The ID of the account.</xs:documentation>
+          <xs:documentation xml:lang="is">Reikningsnúmer viðtakanda greiðslu. Einkvæmt númer reiknings sem er gefið út af viðskiptabanka.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Reference" type="ct:Reference">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Reference for the transaction. Usually the person ID of the originator is set in this field so the receiver of the payment can see from who the transaction is.</xs:documentation>
+          <xs:documentation xml:lang="is">Tilvísunarnúmer, einkennir færsluna og kemur fram á reikningsyfirliti móttakanda.  Vænlegast er að setja kennitölu þess sem er að millifæra í þetta svæði þannig að móttakandi sjái hver er að greiða á sínu reikningsyfirliti.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BillNumber" type="ct:BillNumber">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Bill number for the payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Seðilnúmer. Sjö stafa tilvísunarnúmer sem birtist viðtakanda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CategoryCode" type="ct:CategoryCode" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Category code for the payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Textalykill. Skilgreining á tegund færslu. Textalykill er skilgreindur í viðskiptabanka.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ABGiroInfo">
+    <xs:complexContent>
+      <xs:extension base="pt:ABGiro">
+        <xs:sequence>
+          <xs:element name="PayeeInfo" type="ct:Address">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Information about the recipient of the AB-Giro payment.</xs:documentation>
+              <xs:documentation xml:lang="is">Upplýsingar um viðtakanda greiðslu AB-Gíróseðils.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="CategoryCodeDescription" type="xs:string" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Category code description</xs:documentation>
+              <xs:documentation xml:lang="is">Lýsing á textalykli</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AddPaymentsResult">
+    <xs:sequence>
+      <xs:element name="DepositPaymentError" type="pt:DepositPaymentError" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Payment error.</xs:documentation>
+          <xs:documentation xml:lang="is">Greiðsluvilla.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NumberOfErrors" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Number of errors.</xs:documentation>
+          <xs:documentation xml:lang="is">Fjöldi villna.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Batch">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Payment batch.</xs:documentation>
+      <xs:documentation xml:lang="is">Greiðslubunki.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="pt:BatchAbstract">
+        <xs:sequence>
+          <xs:element name="WithdrawalAccount" type="pt:WithdrawalAccount" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Information about the account from which funds will be drawn.</xs:documentation>
+              <xs:documentation xml:lang="is">Upplýsingar um úttektarreikning.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Notification" type="pt:Communications" minOccurs="0"/>
+          <xs:element name="Payments" type="pt:DepositPayments" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Information about the accounts to which funds will be transferred.</xs:documentation>
+              <xs:documentation xml:lang="is">Upplýsingar um innlagnarreikninga greiðslu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BatchAbstract" abstract="true">
+    <xs:sequence>
+      <xs:element name="Name" type="pt:NameOfBatch" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Name of the batch to create. If not specified the name will be generated.</xs:documentation>
+          <xs:documentation xml:lang="is">Nafn bunka sem á að stofna. Ef nafn er ekki sett þá er búið til nafn.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CreatedDate" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Creation date and time of the batch. If not specified the current date and time will be used.</xs:documentation>
+          <xs:documentation xml:lang="is">Stofndagsetning og -tími bunka. Ef ekki tiltekið er núverandi dagur og tími notaður.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Status" type="pt:Status" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Status of the batch. If not specified a default status will be assigned.</xs:documentation>
+          <xs:documentation xml:lang="is">Bunkastaða. Ef staða er ekki tiltekin mun sjálfgefin staða vera notuð.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BatchType" type="pt:Type" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Type of the batch. If not specified a default type will be assigned.</xs:documentation>
+          <xs:documentation xml:lang="is">Bunkategund. Ef tegund er ekki tiltekin mun sjálfgefin tegund vera notuð.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BookingType" type="pt:BookingType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Boking type of the batch. If not specified a default booking type will be assigned.</xs:documentation>
+          <xs:documentation xml:lang="is">Bókunrtegund bunka. Ef bókunartegund er ekki tiltekin mun sjálfgefin tegund vera notuð.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!--<xs:element name="WithdrawalChanged" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Has the batch's amount been changed?</xs:documentation>
+          <xs:documentation xml:lang="is">Hefur upphæð bunkans verið breytt?</xs:documentation>
+        </xs:annotation>
+      </xs:element>-->
+      <xs:element name="ChangeWithdrawal" type="pt:ChangeWithdrawal" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The batch's withdrawal change permission.</xs:documentation>
+          <xs:documentation xml:lang="is">Leyfi til breytingar á upphæð bunka.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ValueDate" type="xs:date" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The batch's value date.</xs:documentation>
+          <xs:documentation xml:lang="is">Greiðsludagur bunkans.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SystemInfo" type="pt:SystemInfo" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:int" use="optional">
+      <xs:annotation>
+        <xs:documentation xml:lang="en">Batch number.</xs:documentation>
+        <xs:documentation xml:lang="is">Bunkanúmer.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <!-- o.s.frv. -->
+  </xs:complexType>
+  <xs:complexType name="Batches">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A collection of batches which meet some search criteria.</xs:documentation>
+      <xs:documentation xml:lang="is">Safn bunka sem uppfylla tiltekin leitarskilyrði.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Batch" type="pt:BatchInfo" minOccurs="0" maxOccurs="500">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Batches.</xs:documentation>
+          <xs:documentation xml:lang="is">Buknar.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NumberOfBatches" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Number of batches.</xs:documentation>
+          <xs:documentation xml:lang="is">Fjöldi bunka.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <!-- o.s.frv. -->
+  </xs:complexType>
+  <xs:complexType name="BatchInfo">
+    <xs:complexContent>
+      <xs:extension base="pt:BatchAbstract">
+        <xs:sequence>
+          <xs:element name="Info" type="pt:BatchInfoType">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Additional information about the batch.</xs:documentation>
+              <xs:documentation xml:lang="is">Aukaupplýsingar um bunkann.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="WithdrawalAccountInfo" type="pt:WithdrawalAccountInfo">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Information about the account from which funds will be drawn.</xs:documentation>
+              <xs:documentation xml:lang="is">Upplýsingar um úttektarreikning.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Payments" type="pt:DepositPaymentInfo" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Information about the account to which funds will be transferred.</xs:documentation>
+              <xs:documentation xml:lang="is">Upplýsingar um innlagnarreikning greiðslu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BatchInfoResult">
+    <xs:sequence>
+      <xs:element name="TotalAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of payments batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð greiðslna bunkans.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TotalPayments" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Numer of payments in the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarfjöldi greiðslna í bunka.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TotalAmountPaid" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount paid via the batch, including additional charges (cost, interest and discount).</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð greidd með bunkanum, þar með talin viðbótargjöld (kostnaður, vextir og afsláttur).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TotalPaidCosts" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Costs pertaining to the batch once it has been paid.</xs:documentation>
+          <xs:documentation xml:lang="is">Kostnaður vegna bunka er hann hefur verið greiddur.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EstimatedTotalAmountPaid" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Estimated total amount paid via the batch, including additional charges (cost, interest and discount).</xs:documentation>
+          <xs:documentation xml:lang="is">Áætluð heildarupphæð greidd með bunkanum, þar með talin viðbótargjöld (kostnaður, vextir og afsláttur).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EstimatedTotalPaidCosts" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Estimated costs pertaining to the batch when it will have been paid.</xs:documentation>
+          <xs:documentation xml:lang="is">Áætlaður kostnaður vegna bunka þegar hann mun hafa verið greiddur.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Charges" type="pt:Charges">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Information about charges pertaining to the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Upplýsingar um gjöld vegna bunka.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BatchStatistics" type="pt:BatchStatistics">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Statistical information about the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Tölfræðiupplýsingar um bunkann.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Currency" type="ct:CurrencyCode">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Currency code of the batch (determined by the currency of the withdrawal account).</xs:documentation>
+          <xs:documentation xml:lang="is">Gjaldmiðill bunkans (ákvarðaður af gjaldmiðli úttektarreiknings).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BatchInfoType">
+    <xs:choice>
+      <xs:element name="Error" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Description of batch error.</xs:documentation>
+          <xs:documentation xml:lang="is">Lýsing á bunkavillu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Result" type="pt:BatchInfoResult">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Information about the batch payment result.</xs:documentation>
+          <xs:documentation xml:lang="is">Upplýsingar um árangur bunkagreiðslunnar.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="BatchNotification">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">Batch notifications.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Tilkynningar vegna bunka.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Recipient" type="pt:Communications">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">List of communications.</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Listi af tilkynningum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Notify" type="pt:Notification" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Under which conditions should notifications be sent.</xs:documentation>
+          <xs:documentation xml:lang="is">Undir hvaða kringumstæðum skal senda tilkynningar.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BatchStatistics">
+    <xs:sequence>
+      <xs:element name="ABGiroCount" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Number of AB-Giro payments in the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Fjöldi AB-Gírógreiðslna í bunkanum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ABGiroAmount" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of AB-Giro payments in the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð AB-Gírógreiðslna í bunkanum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CGiroCount" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Number of C-Giro payments in the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Fjöldi C-Gírógreiðslna í bunkanum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CGiroAmount" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of C-Giro payments in the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð C-Gírógreiðslna í bunkanum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ClaimCount" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Number of claim payments in the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Fjöldi kröfugreiðslna í bunkanum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ClaimAmount" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of claim payments in the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð kröfugreiðslna í bunkanum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ClaimCost" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of claim cost in the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð kröfukostnaðar í bunkanum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TransferCount" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Number of transfers in the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Fjöldi millifærslna í bunkanum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TransferAmount" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of transfers in the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð millifærslna í bunkanum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CardCount" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Number of card payments in the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Fjöldi kortagreiðslna í bunkanum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CardAmount" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of card payments in the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð kortagreiðslna í bunkanum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ErrorCount" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Numer of payments which caused an error.</xs:documentation>
+          <xs:documentation xml:lang="is">Fjöldi greiðslna sem ollu villu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ErrorAmount" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of payments the batch which resulted an error.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð greiðslna í bunkanum sem ollu villu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ErrorCost" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of the batch's claim cost which was not paid due to errors.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð kröfukostnaðar bunkans sem var ekki greidd vegna villna.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PaidCount" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Numer of payments which have been paid.</xs:documentation>
+          <xs:documentation xml:lang="is">Fjöldi greiðslna sem hafa verið greiddar.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PaidAmount" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of payments the batch which have been paid.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð greiðslna í bunkanum sem hafa verið greiddar.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PaidCost" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of the batch's claim cost which has been paid.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð kröfukostnaðar bunkans sem hefur verið greitt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="UnpaidCount" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Numer of payments which have not been paid.</xs:documentation>
+          <xs:documentation xml:lang="is">Fjöldi greiðslna sem hafa ekki verið greiddar.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="UnpaidAmount" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of payments the batch which have not been paid.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð greiðslna í bunkanum sem hafa ekki verið greiddar.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="UnpaidCost" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of the batch's claim cost which has not been paid.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð kröfukostnaðar bunkans sem hefur ekki verið greitt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BatchStatisticsAndCharges">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Information about different number and amounts of payments in the batch, interests, discounts and costs.</xs:documentation>
+      <xs:documentation xml:lang="is">Upplýsingar um fjölda og upphæðir ólíkra greiðslubeiðna bunkans, vexti, afslætti og kostnað.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="TotalAmount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of payments batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð greiðslna bunkans.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TotalPayments" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Numer of payments in the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarfjöldi greiðslna í bunka.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TotalAmountPaid" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount paid via the batch, including additional charges (cost, interest and discount).</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð greidd með bunkanum, þar með viðbótargjöld (kostnaður, vextir og afsláttur).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Charges" type="pt:Charges">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Information about charges pertaining to the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Upplýsingar um gjöld vegna bunka.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BatchStatistics" type="pt:BatchStatistics">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Statistical information about the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Tölfræðiupplýsingar um bunkann.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="BatchStatus">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Status of a batch of payments</xs:documentation>
+      <xs:documentation xml:lang="is">Mismunandi stöður sem greiðslubunki getur tekið</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="InProgress">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Payment batch is being processed</xs:documentation>
+          <xs:documentation xml:lang="is">Greiðslubunki er í vinnslu hjá banka.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Completed">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The payment batch has been processed</xs:documentation>
+          <xs:documentation xml:lang="is">Afgreiðslu á greiðslubunka lokið</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CompletedWithErrors">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The payment batch has been processed, but one or more payment has an error</xs:documentation>
+          <xs:documentation xml:lang="is">Greiðslubunki hefur verið afgreiddur, en ein eða fleiri greiðslur hafa lent á villu</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Cancelled">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The payment batch has been cancelled by the user.</xs:documentation>
+          <xs:documentation xml:lang="is">Þegar bunki hefur farið í stöðuna óstaðfestur og notandi hættir við að staðfesta hann t.d. í viðmóti netbanka fær bunkinn þessa stöðu.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OnHold">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Forward payments waiting to be executed.</xs:documentation>
+          <xs:documentation xml:lang="is">Greiðslubunki bíður þess að vera framkvæmdur þar sem valið hefur verið að framkvæma hann fram í tímanum</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotConfirmed">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Unconfirmed payment batch. The payment batch needs to be confirmed by other means, e.g. in the internet bank.</xs:documentation>
+          <xs:documentation xml:lang="is">Óstaðfestur bunki, bíður eftir að verða staðfestur handvirkt í t.d. netbanka.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BookingType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Offline">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Booking made offline.</xs:documentation>
+          <xs:documentation xml:lang="is">Bókun ekki gerð á beinlínu.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Online">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Booking made online.</xs:documentation>
+          <xs:documentation xml:lang="is">Bókun gerð á beinlínu.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Card">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Booking made with card.</xs:documentation>
+          <xs:documentation xml:lang="is">Bókun gerð á með korti.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Card">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Describes an CreditCard payment.</xs:documentation>
+      <xs:documentation xml:lang="is">Card greiðslutegund er notað til þess að greiða inn á kreditkort.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="CardNumber" type="ct:CreditCardNumber">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Credit card number</xs:documentation>
+          <xs:documentation xml:lang="is">Kreditkortanumer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CardOwnerPersonID" type="ct:PersonID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The ID of the credit card.</xs:documentation>
+          <xs:documentation xml:lang="is">Kennitala kreditkortaEiganda</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Bank" type="ct:Bank">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The Bank of the credit card</xs:documentation>
+          <xs:documentation xml:lang="is">Bankanúmer kreditkorts</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardInfo">
+    <xs:complexContent>
+      <xs:extension base="pt:Card">
+        <xs:sequence>
+          <xs:element name="PayeeInfo" type="ct:Address">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Information about the recipient of the card transfer.</xs:documentation>
+              <xs:documentation xml:lang="is">Upplýsingar um kortagreiðsluviðtakanda.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CGiro">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Describes a CGiro payment.</xs:documentation>
+      <xs:documentation xml:lang="is">CGiro er notað til þess að greiða C-gíró seðla.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Account" type="ct:AccountID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The ID of the account.</xs:documentation>
+          <xs:documentation xml:lang="is">Reikningsnúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AccountOwnerID" type="ct:PersonID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">PersonID of the account owner.</xs:documentation>
+          <xs:documentation xml:lang="is">Kennitala reikningseiganda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BillNumber" type="ct:BillNumber">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Bill number for the payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Seðilinúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CategoryCode" type="ct:CategoryCode" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Category code for the payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Textalykill greiðslu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CGiroInfo">
+    <xs:complexContent>
+      <xs:extension base="pt:CGiro">
+        <xs:sequence>
+          <xs:element name="PayeeInfo" type="ct:Address">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Information about the recipient of the C-Giro payment.</xs:documentation>
+              <xs:documentation xml:lang="is">Upplýsingar um viðtakanda greiðslu C-Gíróseðils.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="CategoryCodeDescription" type="xs:string" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Category code description</xs:documentation>
+              <xs:documentation xml:lang="is">Lýsing á textalykli</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Charges">
+    <xs:sequence>
+      <!--dráttarvextir         -->
+      <xs:element name="DefaultInterestAmount" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Default interest amount due for payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Upphæð áfallinna dráttarvaxta.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!--Vanskilagjald       -->
+      <xs:element name="DefaultChargeAmount" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Default charge due for payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Upphæð vanskilagjalda til greiðslu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!--Vanskilakostnaður-->
+      <xs:element name="OtherDefaultCostsAmount" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Other default costs due for payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Annar vanskilakostnaður til greiðslu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!--Annarkostn           -->
+      <xs:element name="OtherCostsAmount" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Other costs due to be paid.</xs:documentation>
+          <xs:documentation xml:lang="is">Annars kostnaður til greiðslu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!--Tilkynningargjald-->
+      <xs:element name="NoticeChargeAmount" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Notice charge due for payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Upphæð tilkynningargjalds til greiðslu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!--afsláttur-->
+      <xs:element name="DiscountAmount" type="ct:Amount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The discount amount that is due to be granted.</xs:documentation>
+          <xs:documentation xml:lang="is">Afsláttur sem verður veittur þegar innheimtukrafa er greidd miðað við stöðu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Claim">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Used for claims (ledger 62 and 66), debenture (ledger 74) and bill of exchange (ledger 60, 70).</xs:documentation>
+      <xs:documentation xml:lang="is">Krafa er notuð til þess að greiða greiðsluseðla, s.s. innheimtukröfur (höfuðbók 62 og 66), skuldabréf (höfuðbók 74), víxla (höfuðbók 60 og 70).</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Account" type="ct:AccountID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The ID of the account.</xs:documentation>
+          <xs:documentation xml:lang="is">Reikningsnúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PersonID" type="ct:PersonID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">PersonID from the OCR line of the payment slip. If ledger is 66 then this is the PersonID of the claimant, otherwise this is the personID of the payor.</xs:documentation>
+          <xs:documentation xml:lang="is">Kennitala sem skráð er á OCR línu greiðsluseðils. Ef höfuðbók er 66 þá er þetta kennitala kröfuhafa, í öllum öðrum tilvikum er þetta kennitala greiðanda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PayorID" type="ct:PersonID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Payor person id.</xs:documentation>
+          <xs:documentation xml:lang="is">Kennitala kröfugreiðanda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DueDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Due date for the payment slip.</xs:documentation>
+          <xs:documentation xml:lang="is">Gjalddagi greiðsluseðilsins.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsDeposit" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">True if the payment is deposit, false if the payment slip should be fully paid.</xs:documentation>
+          <xs:documentation xml:lang="is">True ef greiðsla er innborgun inn á greiðsluseðilinn, false ef greiða á seðilinn að fullu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ClaimInfo">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Information about the current status of a claim.</xs:documentation>
+      <xs:documentation xml:lang="is">Upplýsingar um stöðu innheimtukröfu.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="pt:Claim">
+        <xs:sequence>
+          <xs:element name="Status" type="pt:ClaimStatus">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The status of the claim.</xs:documentation>
+              <xs:documentation xml:lang="is">Staða innheimtukröfu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="CategoryCode" type="ct:CategoryCode" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Claimant's text key, explanation of payment. Optional property of claim.</xs:documentation>
+              <xs:documentation xml:lang="is">Textalykill kröfuhafa, skýring á greiðslu. Valkvætt eigindi á innheimtukröfu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="TotalAmountDue" type="ct:Amount">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The total amount due for payment.</xs:documentation>
+              <xs:documentation xml:lang="is">Heildarupphæð greiðslu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="NoticeChargeAmount" type="ct:Amount" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Notice charge due for payment.</xs:documentation>
+              <xs:documentation xml:lang="is">Upphæð tilkynningargjalds til greiðslu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DefaultChargeAmount" type="ct:Amount" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Default charge due for payment.</xs:documentation>
+              <xs:documentation xml:lang="is">Upphæð vanskilagjalda til greiðslu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="OtherCostsAmount" type="ct:Amount" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Other costs due to be paid.</xs:documentation>
+              <xs:documentation xml:lang="is">Annars kostnaður til greiðslu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="OtherDefaultCostsAmount" type="ct:Amount" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Other default costs due for payment.</xs:documentation>
+              <xs:documentation xml:lang="is">Annar vanskilakostnaður til greiðslu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DefaultInterestAmount" type="ct:Amount" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Default interest amount due for payment.</xs:documentation>
+              <xs:documentation xml:lang="is">Upphæð áfallinna dráttarvaxta.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DiscountAmount" type="ct:Amount" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The discount amount that is due to be granted.</xs:documentation>
+              <xs:documentation xml:lang="is">Afsláttur sem verður veittur þegar innheimtukrafa er greidd miðað við stöðu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="SecondaryCollectionIdentifier" type="pt:Identifier" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The identifier of the secondary collection party that handles the claim when it has been marked for secondary collection.</xs:documentation>
+              <xs:documentation xml:lang="is">Auðkenni milliinnheimtuaðila sem krafan er tengd við milliinnheimtumerkingu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="LegalCollectionIdentifier" type="pt:Identifier" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The identifier of the legal collection party that handles the claim when it has been marked for legal collection.</xs:documentation>
+              <xs:documentation xml:lang="is">Auðkenni löginnheimtuaðila sem krafan er tengd við lögfræðimerkingu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="PayerInfo" type="ct:Address" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Information about the payer of the claim.</xs:documentation>
+              <xs:documentation xml:lang="is">Upplýsingar um kröfugreiðanda.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="PayeeInfo" type="ct:Address" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Information about the payee of the claim .</xs:documentation>
+              <xs:documentation xml:lang="is">Upplýsingar um kröfueiganda.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Identifier" type="pt:Identifier" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">The unique identifier of the claimant that the claim relates to.</xs:documentation>
+              <xs:documentation xml:lang="is">Auðkenni kröfuhafa sem innheimtukrafan tengist.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Reference" type="ct:Reference" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Refence determined by claimant. Alphanumeric, maximum 16 letters.</xs:documentation>
+              <xs:documentation xml:lang="is">Tilvísunarnúmer ákveðið af kröfuhafa. Má vera tölu- og bókstafir, 16 stafa langt að hámarki.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="FinalDueDate" type="xs:date" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Final due date of claim.</xs:documentation>
+              <xs:documentation xml:lang="is">Eindagi innheimtukröfu</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="BillNumber" type="ct:BillNumber" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Billnumber, optional. Information provided by claimant.</xs:documentation>
+              <xs:documentation xml:lang="is">Seðilnúmer, valkvætt. Upplýsingar settar af kröfuhafa.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="CustomerNumber" type="pt:CustomerNumber" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Customer number, optional key used by claimant to identify payor. Necessary if payor is to be able to enable automotic debiting of claims.</xs:documentation>
+              <xs:documentation xml:lang="is">
+                Viðskiptanúmer greiðanda. Valkvæður lykill greiðanda kröfunar hjá kröfuhafa. Nauðsynlegur ef hægt á að vera að stofna beingreiðslusamning tengdan innheimtukröfu.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="IsPartialPaymentAllowed" type="xs:boolean" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Indicates whether partial payment is permitted.</xs:documentation>
+              <xs:documentation xml:lang="is">Segir til um hvort greiða megi inn á innheimtukröfu eða ekki.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="CategoryCodeName" type="xs:string" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Name of claimant's text key, explanation of payment. Optional property of claim.</xs:documentation>
+              <xs:documentation xml:lang="is">Heiti textalykill kröfuhafa, skýring á greiðslu. Valkvætt eigindi á innheimtukröfu.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Print" type="pt:PrintInformation" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Indicates whether the payment slip needs to be printed or not. If the claimant has an agreement with the bank, it will handle the printing.</xs:documentation>
+              <xs:documentation xml:lang="is">Segir til um hvort prenta þarf innheimtukröfu. Bankastofnun sér um útprentun ef um það er samkomulag.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ClaimStatus">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Indicates the status of the claim.</xs:documentation>
+      <xs:documentation xml:lang="is">Segir til um ástand innheimtukröfu.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unpaid">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Claim has not yet been settled.</xs:documentation>
+          <xs:documentation xml:lang="is">Innheimtukrafa er ógreidd.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Paid">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Claim has been settled.</xs:documentation>
+          <xs:documentation xml:lang="is">Innheimtukrafa hefur greidd að fullu.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Cancelled">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Claim has been cancelled.</xs:documentation>
+          <xs:documentation xml:lang="is">Innheimtukrafa hefur verið felld niður.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SecondaryCollection">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The claim has been sent to secondary collection.</xs:documentation>
+          <xs:documentation xml:lang="is">Innheimtukrafan hefur verið sett í milliinnheimtu.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LegalCollection">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Legal action will be taken for dept recovery.</xs:documentation>
+          <xs:documentation xml:lang="is">Innheimtukrafa hefur verið sett í lögfræðiinnheimtu.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Invalid">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Claim was invalid when created.</xs:documentation>
+          <xs:documentation xml:lang="is">Innheimtukrafa hefur lent villu við stofnun.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ChangeWithdrawal">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Forbidden">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Both increase and decrease forbidden.</xs:documentation>
+          <xs:documentation xml:lang="is">Bæði hækkun og lækkun bönnuð.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DecreaseAllowedIncreaseForbidden">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Decrease allowed, Increase forbidden.</xs:documentation>
+          <xs:documentation xml:lang="is">Lækkun leyfð, Hækkun bönnuð.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Allowed">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Both increase and decrease allowed</xs:documentation>
+          <xs:documentation xml:lang="is">Bæði hækkun og lækkun leyfð.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Communication">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US"></xs:documentation>
+      <xs:documentation xml:lang="is-IS">Sendingarform á tilkynningu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="IsPostalMail" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Postal mail</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Bréfpóstur</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ReceiverAddress" type="ct:Address" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Ef isPostalMail er true þá er ath hvort eitthvað er í ReceiverAddress og það notað ef það valid annar er gert ráð fyrir að heimilifang viðtakanda sé sótt í þjóðskrá eftir kennitölu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Email" type="ct:Email" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US"></xs:documentation>
+          <xs:documentation xml:lang="is-IS">Tölvupóstfang sem á að senda á.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SMS" type="ct:PhoneNumber"  minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en-US">Mobile phone number for SMS message (Short Message Service)</xs:documentation>
+          <xs:documentation xml:lang="is-IS">Símanúmer sem á að senda smáskilaboð (SMS) í.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Language" type="xs:string" default="is-IS">
+      <xs:annotation>
+        <xs:documentation xml:lang="en-US"></xs:documentation>
+        <xs:documentation xml:lang="is-IS">Tungumál sem tilkynningin á að vera á.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="Communications">
+    <xs:annotation>
+      <xs:documentation xml:lang="en-US">List of communications.</xs:documentation>
+      <xs:documentation xml:lang="is-IS">Listi af tilkynningum.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Communication" type="pt:Communication" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="CustomerNumber">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Customer number of payor, claimant's unique code for the customer.</xs:documentation>
+      <xs:documentation xml:lang="is">Einkvæmt viðskiptanúmer greiðanda í kerfi kröfuhafa.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="16"/>
+      <xs:pattern value=".{0,16}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DepositAccountInfo">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Information about deposit account.</xs:documentation>
+      <xs:documentation xml:lang="is">Upplýsingar um innleggsreikning.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AgreementId" type="ct:AccountID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Payment recipient's account.</xs:documentation>
+          <xs:documentation xml:lang="is">Reikningsnúmer viðtakanda greiðslu. Einkvæmt númer reiknings sem er gefið út af viðskiptabanka.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OwnerInfo" type="pt:OwnerInfo">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Information about payee.</xs:documentation>
+          <xs:documentation xml:lang="is">Upplýsingar um greiðsluviðtakanda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CategoryCode" type="ct:CategoryCode" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Category code.</xs:documentation>
+          <xs:documentation xml:lang="is">Textalykill greiðslu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Category" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Category code name.</xs:documentation>
+          <xs:documentation xml:lang="is">Heiti textalykils.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DepositPayment">
+    <xs:complexContent>
+      <xs:extension base="pt:DepositPaymentAbstract">
+        <xs:sequence>
+          <xs:choice>
+            <xs:element name="ABGiro" type="pt:ABGiro"/>
+            <xs:element name="CGiro" type="pt:CGiro"/>
+            <xs:element name="Claim" type="pt:Claim"/>
+            <xs:element name="Transfer" type="pt:Transfer"/>
+            <!--<xs:element name="Card" type="pt:Card"/>-->
+            <!--<xs:element name="Mobile" type="pt:Mobile"/>-->
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DepositPaymentAbstract" abstract="true">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Information about the account that funds will be transferred to.</xs:documentation>
+      <xs:documentation xml:lang="is">Upplýsingar um innlagnarreikning greiðslu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Amount" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Payment amount in ISK. Please note that it is only possible to transfer money between accounts in ISK.</xs:documentation>
+          <xs:documentation xml:lang="is">Upphæð greiðslu í krónum. Athugið að einungis er hægt að millifæra milli reikninga í íslenskum krónum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Receipt" type="pt:Communications" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Receipts that are sent when the payment is processed.</xs:documentation>
+          <xs:documentation xml:lang="is">Kvittanir sem sendar eru þegar greiðsla er framkvæmd.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Description for the payment. This description is shown if the customer looks up the payment in the Internet bank.</xs:documentation>
+          <xs:documentation xml:lang="is">Skýring greiðslu. Birtist í netbönkum ef að notandi flettir upp greiðslunni.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="35"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="BookingId" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The booking ID field can be used by the sender to include his own ID for the payment. This ID is also returned to the sender when the payment is queried (e.g. when the GetPaymentsResult operation is used).</xs:documentation>
+          <xs:documentation xml:lang="is">Svæði sem notandi getur notað að eigin vild, t.d. með því að setja ID númer greiðslu í sínu kerfi. Þetta svæði fylgir greiðslum þegar gerð er fyrirspurn á greiðslur síðar meir, t.d. þegar verið er að sækja niðurstöðu framkvæmdar.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+            <xs:minLength value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:int" use="optional">
+      <xs:annotation>
+        <xs:documentation xml:lang="en">Payment number.</xs:documentation>
+        <xs:documentation xml:lang="is">Greiðslunúmer.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DepositPaymentError">
+    <xs:sequence>
+      <xs:element name="ErrorDecription" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Error description.</xs:documentation>
+          <xs:documentation xml:lang="is">Villulýsing.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:int" use="required">
+      <xs:annotation>
+        <xs:documentation xml:lang="en">Payment number.</xs:documentation>
+        <xs:documentation xml:lang="is">Greiðslunúmer.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DepositPaymentInfo">
+    <xs:complexContent>
+      <xs:extension base="pt:DepositPaymentAbstract">
+        <xs:sequence>
+          <xs:choice>
+            <xs:element name="ABGiroInfo" type="pt:ABGiroInfo"/>
+            <xs:element name="CGiroInfo" type="pt:CGiroInfo"/>
+            <xs:element name="ClaimInfo" type="pt:ClaimInfo"/>
+            <xs:element name="TransferInfo" type="pt:TransferInfo"/>
+            <!--<xs:element name="CardInfo" type="pt:CardInfo"/>
+            <xs:element name="MobileInfo" type="pt:MobileInfo"/>-->
+          </xs:choice>
+          <xs:element name="DepositAccountInfo" type="pt:DepositAccountInfo"/>
+          <xs:element name="Info" type="pt:DepositPaymentInfoType">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Information about the paytment's result.</xs:documentation>
+              <xs:documentation xml:lang="is">Upplýsingar um árangur greiðslunnar.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DepositPaymentInfoType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Information about the payment's status.</xs:documentation>
+      <xs:documentation xml:lang="is">Upplýsingar um afdrif greiðslunnar.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="TotalAmount" type="xs:decimal">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount of the payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð greiðslu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TotalAmountPaid" type="ct:Amount">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Total amount paid via the payment, including additional charges (cost, interest and discount).</xs:documentation>
+          <xs:documentation xml:lang="is">Heildarupphæð greiðslunni, þar með talin viðbótargjöld (kostnaður, vextir og afsláttur).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Charges" type="pt:Charges">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Information about additional charges pertaining to the payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Upplýsingar um viðbótargjöld vegna greiðslu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Status" type="pt:DepositPaymentStatus" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Status of the payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Staða greiðslu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Reason" type="pt:ErrorReason">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Description of payment error.</xs:documentation>
+          <xs:documentation xml:lang="is">Lýsing á greiðsluvillu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DepositPayments">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Collection of payments.</xs:documentation>
+      <xs:documentation xml:lang="is">Safn greiðslna.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="DepositPayment" type="pt:DepositPayment" minOccurs="0" maxOccurs="500">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Greiðsla.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NumberOfPayments" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Number of payments.</xs:documentation>
+          <xs:documentation xml:lang="is">Fjöldi greiðslna.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="DepositPaymentStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UnPaid">
+        <xs:annotation>
+          <xs:documentation>0            Ógreitt</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Changed">
+        <xs:annotation>
+          <xs:documentation>1            Breytt</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WithdrawalChanged">
+        <xs:annotation>
+          <xs:documentation>2            Úttektarupphæð breytt</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Paid">
+        <xs:annotation>
+          <xs:documentation>3            Greitt</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Error">
+        <xs:annotation>
+          <xs:documentation>4            Villa</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Cancelled">
+        <xs:annotation>
+          <xs:documentation>5            Hætt við greiðslu, vegna villu í keyrslu á bunka</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Reversed">
+        <xs:annotation>
+          <xs:documentation>6            Bakfært</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Deleted">
+        <xs:annotation>
+          <xs:documentation>7            Eytt</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Booked">
+        <xs:annotation>
+          <xs:documentation>8            Bókuð</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BookedWithdrawalChanged">
+        <xs:annotation>
+          <xs:documentation>9            Bókuð, úttektarupphæð breytt</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DepositChanged">
+        <xs:annotation>
+          <xs:documentation>10          Innborgunarupphæð breytt</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BookedDepositChanged">
+        <xs:annotation>
+          <xs:documentation>11          Bókuð, innborgunarupphæð breytt</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Sent">
+        <xs:annotation>
+          <xs:documentation>20          Send til úttektar </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CardWithdrawalClosed">
+        <xs:annotation>
+          <xs:documentation>21          Úttekt af korti lokið</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ErrorReason">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Description of payment error.</xs:documentation>
+      <xs:documentation xml:lang="is">Lýsing á greiðsluvillu.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Text" maxOccurs="unbounded" type="pt:ErrorText">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Description of payment error.</xs:documentation>
+          <xs:documentation xml:lang="is">Lýsing á greiðsluvillu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ErrorText" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ErrorText">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Description of payment error.</xs:documentation>
+      <xs:documentation xml:lang="is">Lýsing á greiðsluvillu.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <!--<xs:attribute ref="xml:lang" use="required">-->
+        <xs:attribute name="Language" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Description language.</xs:documentation>
+            <xs:documentation xml:lang="is">Tungumál lýsingar.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="Identifier">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">An identifier unique to each claimant indicating primarily the account into which payments will be made. Can consist of alphanumeric characters, maximum three letters.</xs:documentation>
+      <xs:documentation xml:lang="is">Auðkenni kröfuhafa sem vísar einkum á númer þess reiknings sem greiðsla til kröfuhafa á að ráðstafast inná. Má vera tölu- og bókstafir alls 3 stafa langt.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9A-Za-z]{3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Mobile">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Describes an Mobile refill.</xs:documentation>
+      <xs:documentation xml:lang="is">Mobile greiðslutegund er notað til þess að hlaða síma.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="PhoneCompanyId" type="pt:PhoneCompanyId" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">PhoneCompany</xs:documentation>
+          <xs:documentation xml:lang="is">Símafyrirtæki</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Services" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Services.</xs:documentation>
+          <xs:documentation xml:lang="is">Þjónusta</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MobileNumber" type="ct:PhoneNumber" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Mobile number</xs:documentation>
+          <xs:documentation xml:lang="is">Simanúmer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MobileInfo">
+    <xs:complexContent>
+      <xs:extension base="pt:Mobile"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NameAndId">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Owner's name and person ID.</xs:documentation>
+      <xs:documentation xml:lang="is">Nafn og kennitala eiganda.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="OwnerId" type="ct:PersonID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Person ID.</xs:documentation>
+          <xs:documentation xml:lang="is">Kennitala.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Name.</xs:documentation>
+          <xs:documentation xml:lang="is">Nafn.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="NameOfBatch">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A name provided by and for the convenience of the sender.</xs:documentation>
+      <xs:documentation xml:lang="is">Nafn sendingar. Valfrjálst svæði sendanda.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Notification">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Notification conditions.</xs:documentation>
+      <xs:documentation xml:lang="is">Kringumstæður tilkynninga.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="never"/>
+      <xs:enumeration value="error"/>
+      <xs:enumeration value="always"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="OwnerInfo">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Information about account owner.</xs:documentation>
+      <xs:documentation xml:lang="is">Upplýsingar um reikningseiganda.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Owner" type="pt:NameAndId">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Owner's name and person ID.</xs:documentation>
+          <xs:documentation xml:lang="is">Nafn og kennitala eiganda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Address" type="ct:Address">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Owner's name and person ID.</xs:documentation>
+          <xs:documentation xml:lang="is">Nafn og kennitala eiganda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="PhoneCompanyId">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">PhoneCompanyId.</xs:documentation>
+      <xs:documentation xml:lang="is">Númer á símafyrirtæki.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PrintInformation">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Information about whether a claim should be printed and if not, the reason why not.</xs:documentation>
+      <xs:documentation xml:lang="is">Upplýsingar um hvort prentun þurfi út innheimtukröfu eða ástæður þess að ekki er krafist útprentunar.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NoInformation">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">No information about printing is returned, mainly when claims are updated or cancelled. </xs:documentation>
+          <xs:documentation xml:lang="is">Engum upplýsingum um prentun er skilað, einkum þegar innheimtukröfum er breytt eða eytt.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Print">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Claim should be printed, either by the claimant or the bank depending on contractual obligations. </xs:documentation>
+          <xs:documentation xml:lang="is">Prenta á innheimtukröfuna, hjá kröfuhafa eða banka eftir því sem um hefur samist milli þeirra.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DirectPaymentClaim">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">A claim whose payor has instructed his bank to pay it on the due date out of a specified debit account.</xs:documentation>
+          <xs:documentation xml:lang="is">Beingreiðslukrafa, sem kröfugreiðandi hefur samið um við bankastofnun að greiðist á gjalddaga út af tilgreindum reikningi.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="InternetBankingClaim">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">A claim whose payor has marked so that no copy is printed but it appears in his Internet Bank.</xs:documentation>
+          <xs:documentation xml:lang="is">Netkrafa, sem kröfugreiðanda vill að birtist í netbanka en er ekki prentuð út.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ProcessBatchResult">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Batch's process status.</xs:documentation>
+      <xs:documentation xml:lang="is">Afgreiðslustaða bunka.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Processed">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The batch has been processed.</xs:documentation>
+          <xs:documentation xml:lang="is">Bunkinn hefur verið afgreiddur.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PendingNextBatchProcess">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The batch is pending process until the next daily batch-process of payments.</xs:documentation>
+          <xs:documentation xml:lang="is">Bunkinn bíður afgreiðslu uns næsta runuvinnsla greiðslubeiðna mun fara fram.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PendingFutureDate">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The batch is pending process until its specified payment date.</xs:documentation>
+          <xs:documentation xml:lang="is">Bunkinn bíður afgreiðslu uns greiðludagur hans rennur upp.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PendingRTGSSystem">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The batch is pending process until the next daily batch-process of payments due to its amount.</xs:documentation>
+          <xs:documentation xml:lang="is">>Bunkinn bíður afgreiðslu uns næsta runuvinnsla greiðslubeiðna mun fara fram vegna upphæðar sinnar (sem kallar á SG-vinnslu).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PendingCurrencySystem">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The batch is pending process until the next daily batch-process of payments due its currency.</xs:documentation>
+          <xs:documentation xml:lang="is">>Bunkinn bíður afgreiðslu uns næsta runuvinnsla greiðslubeiðna mun fara fram vegna gjaldmiðils síns (sem kallar á IG-vinnslu).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Reuse">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Witch payments to reuse.</xs:documentation>
+      <xs:documentation xml:lang="is">Hvaða greiðslubeiðnir á að endurnýta.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="all">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">All payments shall be reused.</xs:documentation>
+          <xs:documentation xml:lang="is">Allar greiðslur skal endurnýta.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="unpaid">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Unpaid payments shall be reused.</xs:documentation>
+          <xs:documentation xml:lang="is">Ógreiddar greiðslur skal endurnýta.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="paid">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Paid payments shall be reused.</xs:documentation>
+          <xs:documentation xml:lang="is">Greiddar greiðslur skal endurnýta.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="error">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Error payments shall be reused.</xs:documentation>
+          <xs:documentation xml:lang="is">Greiðslur sem ollu villu skal endurnýta.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Status">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Open">
+        <xs:annotation>
+          <xs:documentation>Opin -0</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Init">
+        <xs:annotation>
+          <xs:documentation>Mottekin - 1</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="InProgress">
+        <xs:annotation>
+          <xs:documentation>IVinnslu - 2</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Completed">
+        <xs:annotation>
+          <xs:documentation>Afgreidd - 3</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CompletedWithError">
+        <xs:annotation>
+          <xs:documentation>AfgreiddMedVillum - 4</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Cancelled">
+        <xs:annotation>
+          <xs:documentation>HaettVidVinnsluVVillu - 5</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Reversed">
+        <xs:annotation>
+          <xs:documentation>Bakfaert - 6</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Deleted">
+        <xs:annotation>
+          <xs:documentation>Eydd - 7</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CompletedChanged">
+        <xs:annotation>
+          <xs:documentation>AfgreiddUtektBreytt - 8</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Booked">
+        <xs:annotation>
+          <xs:documentation>Bokud - 9</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BookedWithError">
+        <xs:annotation>
+          <xs:documentation>BokudMedVillum - 10</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BookedSentRB">
+        <xs:annotation>
+          <xs:documentation>BokudOgSendTilRB - 11</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BookedWithErrorSentRB">
+        <xs:annotation>
+          <xs:documentation>BokudMedVillumOgSentTilRB - 12</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SystemInfo">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">System information which helps user to identify batches.</xs:documentation>
+      <xs:documentation xml:lang="is">Kerfisupplýsingar sem auðvelda notanda að bera kennsl á bunka.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="SystemId " type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">System which was used to create or update the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Kerfi sem er notað til þess að búa til eða breyta bunkanum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EntryBy " type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Name of user or system which created or updated the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Nafn notanda eða kerfis sem bjó til eða breytti bunkanum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EntryDate " type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Last change of the batch.</xs:documentation>
+          <xs:documentation xml:lang="is">Síðasta breyting bunkans.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="Type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OneOutManyIn">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">One out-booking, many in-bookings.</xs:documentation>
+          <xs:documentation xml:lang="is">Ein útbókun, margar innbókanir.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OneOutOneIn">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">One out-booking, one in-booking.</xs:documentation>
+          <xs:documentation xml:lang="is">Ein útbókun, eins innbókun.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ManyOutOneIn">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">May out-bookings, one in-booking.</xs:documentation>
+          <xs:documentation xml:lang="is">Margar úbókanir, ein innbókun.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Transfer">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A money transfer to an account.</xs:documentation>
+      <xs:documentation xml:lang="is">Venjuleg millifærsla.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Account" type="ct:AccountID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The ID of the account.</xs:documentation>
+          <xs:documentation xml:lang="is">Reikningsnúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AccountOwnerID" type="ct:PersonID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Person ID of the account owner.</xs:documentation>
+          <xs:documentation xml:lang="is">Kennitala reikningseiganda</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CategoryCode" type="ct:CategoryCode" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Category code for the payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Textalykill greiðslu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Reference" type="ct:Reference" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Reference for the transaction. Usually the person ID of the originator is set in this field so the receiver of the payment can see from who the transaction is.</xs:documentation>
+          <xs:documentation xml:lang="is">Tilvísunarnúmer, einkennir færsluna og kemur fram á reikningsyfirliti móttakanda.  Vænlegast er að setja kennitölu þess sem er að millifæra í þetta svæði þannig að móttakandi sjái hver er að greiða á sínu reikningsyfirliti.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BillNumber" type="ct:BillNumber" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Bill number for the payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Seðilinúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransferInfo">
+    <xs:complexContent>
+      <xs:extension base="pt:Transfer">
+        <xs:sequence>
+          <xs:element name="PayeeInfo" type="ct:Address">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Information about the recipient of the transfer.</xs:documentation>
+              <xs:documentation xml:lang="is">Upplýsingar um millifærsluviðtakanda.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="CategoryCodeDescription" type="xs:string" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Category code description.</xs:documentation>
+              <xs:documentation xml:lang="is">Lýsing á textalykli.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="WithdrawalAccount">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Information about the account from which funds will be drawn.</xs:documentation>
+      <xs:documentation xml:lang="is">Upplýsingar um úttektarreikning.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AgreementId" type="ct:AccountID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The ID of the account the funds will be drawn from.</xs:documentation>
+          <xs:documentation xml:lang="is">Reikningsnúmer úttektarreiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OwnerId" type="ct:PersonID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Person ID of the account owner.</xs:documentation>
+          <xs:documentation xml:lang="is">Kennitala reikningseiganda.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CategoryCode" type="ct:CategoryCode" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Category code for the payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Textalykill greiðslu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Reference" type="ct:Reference" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Reference for the transaction. Usually the person ID of the originator is set in this field so the reiceiver of the payment can see from who the transaction is.</xs:documentation>
+          <xs:documentation xml:lang="is">Tilvísunarnúmer, einkennir færsluna og kemur fram á reikningsyfirliti móttakanda.  Vænlegast er að setja kennitölu þess sem er að millifæra í þetta svæði þannig að móttakandi sjái hver er að greiða á sínu reikningsyfirliti.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="BillNumber" type="ct:BillNumber" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Bill number for the payment.</xs:documentation>
+          <xs:documentation xml:lang="is">Seðilinúmer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Notification " type="pt:BatchNotification " minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Receipts that are sent to the payor when the payment is processed.</xs:documentation>
+          <xs:documentation xml:lang="is">Kvittanir sem sendar eru á greiðanda þegar greiðsla er framkvæmd.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SecurityCode" type="ct:AccountSecurityCode" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Security code of the withdrawl account.</xs:documentation>
+          <xs:documentation xml:lang="is">Leyninúmer úttektarreiknings.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WithdrawalAccountInfo">
+    <xs:complexContent>
+      <xs:extension base="pt:WithdrawalAccount">
+        <xs:sequence>
+          <xs:element name="Info" type="ct:Address">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Information about payer.</xs:documentation>
+              <xs:documentation xml:lang="is">Upplýsingar um greiðanda.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Category" type="xs:string" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">Category code description</xs:documentation>
+              <xs:documentation xml:lang="is">Lýsing á textalykli</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+</xs:schema>

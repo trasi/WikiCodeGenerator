@@ -1,0 +1,414 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RB.Utils.WikiCodeGenerator</name>
+    </assembly>
+    <members>
+        <member name="M:RB.Utils.WikiCodeGenerator.ConfluenceProxy.#ctor(System.String,System.String)">
+            <summary>
+            Smiður sem tekur við Wiki-notandanafni og -lykilorði til þess að auðkenna notanda gagnvart RB Wiki.
+            </summary>
+            <param name="user">Wiki-notendanafn. Sé gildi þessa viðfangs null eða tómi strengurinn er Wiki-notendanafn úr stillingaskrá (App.config) notað.</param>
+            <param name="password">Wiki-lykilorð. Sé gildi þessa viðfangs null eða tómi strengurinn er Wiki-lykilorð úr stillingaskrá (App.config) notað.</param>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.ConfluenceProxy.#ctor">
+            <summary>
+            Smiður sem notar Wiki-notandanafn og -lykilorð úr stillingaskrá (App.config) til þess að auðkenna notanda gagnvart RB Wiki.
+            </summary>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.ConfluenceProxy.UpdateWiki(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Uppfærir Wiki-skjal Torg-þjónustuaðgerðar með viðkomandi Wiki-kóða.
+            </summary>
+            <param name="service">Nafn Torg-þjónustu.</param>
+            <param name="operation">Nafn Torg-þjónustuaðgerðar.</param>
+            <param name="description">Wiki-kóði sem með skal uppfæra Wiki-skjal viðkomandi Torg-þjónustuaðgerðar.</param>
+            <param name="overwrite">Ef ekki true er reynt að uppfæra aðeins Lýsingar- Inntaks-, Úttaks- og Dæmskafla Wiki-skjals en halda öðrum 
+            hlutum þess óbreyttum, annars er Wiki-skjal yfirskrifað.</param>
+            <returns>URL uppfærðs Wiki-skjals.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.ConfluenceProxy.UpdateWikiURL(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Uppfærir tilgreint Wiki-skjal með viðkomandi Wiki-kóða.
+            </summary>
+            <param name="url">URL Wiki-skjals.</param>
+            <param name="title">Titill Wiki-skjals.</param>
+            <param name="description">Wiki-kóði sem með skal uppfæra viðkomandi Wiki-skjal.</param>
+            <param name="overwrite">Ef ekki true er reynt að uppfæra aðeins Lýsingar- Inntaks-, Úttaks- og Dæmskafla Wiki-skjals en halda öðrum 
+            hlutum þess óbreyttum, annars er Wiki-skjal yfirskrifað.</param>
+            <returns>URL uppfærðs Wiki-skjals.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.ConfluenceProxy.UpdatePage(System.Int64,System.String,System.String,System.Boolean)">
+            <summary>
+            Uppfærir Wiki-skjal eftir númeri.
+            </summary>
+            <param name="page_id">Númer Wiki-skjals sem skal uppfæra.</param>
+            <param name="content">Wiki-kóði sem með skal uppfæra viðkomandi Wiki-skjal.</param>
+            <param name="overwrite">Ef ekki true er reynt að uppfæra aðeins Lýsingar- Inntaks-, Úttaks- og Dæmskafla Wiki-skjals en halda öðrum 
+            hlutum þess óbreyttum, annars er Wiki-skjal yfirskrifað.</param>
+            <returns>RemotePage-hlutur sem samsvarar uppfærðu Wiki-skjali.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.ConfluenceProxy.CreatePage(System.String,System.String,System.Int64)">
+            <summary>
+            Býr til nýtt Wiki-skjal.
+            </summary>
+            <param name="title">Titil Wiki-skjals.</param>
+            <param name="content">Wiki-kóði viðkomandi Wiki-skjals.</param>
+            <param name="parent_id">Númer Wiki-skjals sem nýtt Wiki-skal sett undir.</param>
+            <returns>RemotePage-hlutur sem samsvarar nýja Wiki-skjalinu.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:RB.Utils.WikiCodeGenerator.ConfluenceProxy.GetPageIDs(System.String,System.String)" -->
+        <member name="M:RB.Utils.WikiCodeGenerator.ConfluenceProxy.GetPageID(System.String)">
+            <summary>
+            Finnur númer Wiki-skajs eftir URL þess.
+            </summary>
+            <param name="url">Meint URL Wiki-skjals.</param>
+            <returns>Númer Wiki-skals. Ef ekkert skjal finnst í viðkomandi space í Wiki með umrætt URL er skilagildið -1.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.ConfluenceProxy.Dispose">
+            <summary>
+            Dispose-aðgerð.
+            </summary>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.ExampleGenerator.GenerateXMLExample(System.String,System.String)">
+            <summary>
+            Smíðar XML-dæmi sem svarar til SOAP-skeytis.
+            </summary>
+            <param name="message">Nafn SOAP-skeytis.</param>
+            <param name="schema">Nafn skemaskrár sem skilgreinir viðkomandi SOAP-skeyti.</param>
+            <returns>XML-dæmi sem svarar til viðkomandi SOAP-skeytis.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GenerateWikiCode(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Smíðar Wiki-kóða fyrir Torg-þjónustuaðgerð.
+            </summary>
+            <param name="description">Lýsing Torg-þjónustuaðgerðar.</param>
+            <param name="operation">Nafn Torg-þjónustuaðgerðar.</param>
+            <param name="wsdl">WSDL-skjal Torg-þjónustu.</param>
+            <param name="message_schema">Nafn WSDL-skjals eða skemaskrár sem skilgreinir þjónustaðgerir Torg-þjónustu.</param>
+            <param name="type_schema">Nafn skemaskrár sem skilgreinir týpur Torg-þjónustu.</param>
+            <param name="common_type_schema">Nafn skemaskrár sem skilgreinir samnýttar týpur Torg-þjónustu.</param>
+            <param name="version">Útgáfunúmer Torg-þjónustuaðgerðar.</param>
+            <param name="version_date">Útgáfudagsetning Torg-þjónustuaðgerðar.</param>
+            <param name="version_description">Útgáfulýsing Torg-þjónustuaðgerðar.</param>
+            <param name="generate_example">XML-dæmi fyrir viðkomandi Torg-þjónustuaðgerð er smíðað ef og aðeins ef true.</param>
+            <param name="generate_version">Útgáfuupplýsingar fyrir viðkomandi Torg-þjónustuaðgerð er sett í Wiki-kóða ef og aðeins ef true.</param>
+            <param name="dictionary_status">Á Wiki-kóðinn að innihalda upplýsingar um stöðu í Orðabók RB?</param>
+            <param name="language">Tungumál Wiki-kóða: WikiCodeLangage.Icelandic, WikiCodeLanguage.English, ...</param>
+            <returns>Wiki-kóði fyrir Torg-þjónustuaðgerð í samræmi við viðföng.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.SubmitToWiki(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Sendir Wiki-kóða í RB Wiki.
+            </summary>
+            <param name="service">Nafn Torg-þjónustu sem Wiki-kóðinn lýsir.</param>
+            <param name="operation">Nafn Torg-þjónustuaðgerðar sem Wiki-kóðinn lýsir.</param>
+            <param name="description">Wiki-kóði Torg-þjónustuaðgerðar.</param>
+            <param name="wiki_user">Wiki-notandanafn.</param>
+            <param name="wiki_password">Wiki-lykilorð.</param>
+            <param name="overwrite">Ef ekki true er reynt að uppfæra aðeins Lýsingar- Inntaks-, Úttaks- og Dæmskafla Wiki-skjals en halda öðrum 
+            hlutum þess óbreyttum, annars er Wiki-skjal yfirskrifað.</param>
+            <returns>URL viðeigandi Wiki-skjals í RB Wiki.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GenerateMessage(System.String,System.String,System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            Smíðar Wiki-kóða sem svarar til SOAP-skeytis.
+            </summary>
+            <param name="message">Nafn SOAP-skeytis.</param>
+            <param name="message_schema">Nafn WSDL-skjals eða skemaskrár sem skilgreinir þjónustaðgerir Torg-þjónustu.</param>
+            <param name="type_schema">Nafn skemaskrár sem skilgreinir týpur Torg-þjónustu.</param>
+            <param name="common_type_schema">Nafn skemaskrár sem skilgreinir samnýttar týpur Torg-þjónustu.</param>
+            <param name="include_dictionary_approval_status">Á Wiki-kóðinn að innihalda upplýsingar um stöðu í Orðabók RB?</param>
+            <param name="language">Tungumál Wiki-kóða: WikiCodeLangage.Icelandic, WikiCodeLanguage.English, ...</param>
+            <returns>Wiki-kóði fyrir viðkomandi SOAP-skeyti.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GenerateType(System.Xml.Linq.XElement,System.Xml.Linq.XDocument,System.Xml.Linq.XDocument,System.Boolean,System.String)">
+            <summary>
+            Smíðar Wiki-kóða fyrir skematýpu.
+            </summary>
+            <param name="element">Skematýpa.</param>
+            <param name="schema_document">Skema sem skilgreinir týpur Torg-þjónustu.</param>
+            <param name="common_schema_document">Skema sem skilgreinir samnýttar týpur Torg-þjónustu.</param>
+            <param name="include_dictionary_approval_status">Á Wiki-kóðinn að innihalda upplýsingar um stöðu í Orðabók RB?</param>
+            <param name="language">Tungumál Wiki-kóða: WikiCodeLangage.Icelandic, WikiCodeLanguage.English, ...</param>
+            <returns>Wiki-kóði fyrir viðkomandi skematýpu.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GenerateTerminalElement(System.Xml.Linq.XElement,System.Xml.Linq.XDocument,System.Boolean,System.String)">
+            <summary>
+            Smíðar Wiki-kóða fyrir skemastak sem hefur ekki frekari undirstök.
+            </summary>
+            <param name="element">Skemastak.</param>
+            <param name="current_document">Skema sem skilgreinir stakið.</param>
+            <param name="include_dictionary_approval_status">Á Wiki-kóðinn að innihalda upplýsingar um stöðu í Orðabók RB?</param>
+            <param name="language">Tungumál Wiki-kóða: WikiCodeLangage.Icelandic, WikiCodeLanguage.English, ...</param>
+            <returns>Wiki-kóði fyrir viðkomandi skemastak.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GenerateAttribute(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Smíðar Wiki-kóða fyrir skemaeigindi (attribute).
+            </summary>
+            <param name="name">Nafn skemaeigindis.</param>
+            <param name="type">Tag skemaeigindis.</param>
+            <param name="occurance">Mætingarskylda skemaeigindis.</param>
+            <param name="description">Lýsing skemaeigindis.</param>
+            <param name="dictionary_approval_status">Staða skilgreiningar í Orðabók RB.</param>
+            <returns>Wiki-kóði fyrir viðkomandi skemaeigindi.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GenerateElement(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Smíðar Wiki-kóða fyrir skemastak.
+            </summary>
+            <param name="name">Nafn skemastaks.</param>
+            <param name="type">Tag skemastaks.</param>
+            <param name="occurance">Mætingarskylda skemastaks.</param>
+            <param name="description">Lýsing skemastaks.</param>
+            <param name="dictionary_approval_status">Staða skilgreiningar í Orðabók RB.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GenerateChoicePrefix(System.Int32,System.String)">
+            <summary>
+            Smíðar Wiki-kóðaforskeyti fyfir valstak (choice-element).
+            </summary>
+            <param name="number">Fjöldi valmöguleika valstaks.</param>
+            <param name="language">Tungumál Wiki-kóða: WikiCodeLangage.Icelandic, WikiCodeLanguage.English, ...</param>
+            <returns>Wiki-kóðaforskeyti fyfir valstak með tiltekinn fjölda valmöguleika.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GenerateChoicePostfix">
+            <summary>
+            Smíðar Wiki-kóðaviðskeyti fyrir valstak (choice-element).
+            </summary>
+            <returns>Wiki-kóðaviðskeyti fyfir valstak.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GenerateChoice(System.String,System.String)">
+            <summary>
+            Smíðar Wiki-kóðainnskeyti fyrir valstak (choice element).
+            </summary>
+            <param name="name">Nafn valstaks.</param>
+            <returns>Wiki-kóðainnskeyti fyrir viðkomandi valstak.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GenerateExample(System.String)">
+            <summary>
+            Smíðar Wiki-kóða fyrir XML-dæmi.
+            </summary>
+            <param name="example">XML-dæmi.</param>
+            <returns>Wiki-kóði fyrir XML-dæmi.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GenerateEnumeration(System.String,System.String)">
+            <summary>
+            Smíðar Wiki-kóða fyrir upplistunarstak.
+            </summary>
+            <param name="name">Nafn upplistunarstaks.</param>
+            <param name="description">Lýsing upplistunarstaks.</param>
+            <returns>Wiki-kóði fyrir viðkomandi upplistunarstak.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GenerateDescription(System.String,System.String)">
+            <summary>
+            Smíðar Wiki-kóða fyrir lýsingu.
+            </summary>
+            <param name="description">Lýsing.</param>
+            <param name="language">Tungumál Wiki-kóða: WikiCodeLangage.Icelandic, WikiCodeLanguage.English, ...</param>
+            <returns>Wiki-kóði viðkomandi lýsingar.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GenerateDictionaryApprovalStatus(System.String)">
+            <summary>
+            Smíðar Wiki-kóða fyrir stöðu nafns í Orðabók RB.
+            </summary>
+            <param name="name"></param>
+            <returns>Wiki-kóði fyrir stöðu nafns í Orðabók RB</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GenerateDictionaryLegend(System.String,System.String)">
+            <summary>
+            Smíðar Wiki-kóða til skýringar orðabókartákna sem koma fyrir í streng.
+            </summary>
+            <param name="wikicode">Strengur sem inniheldur mögulega orðabókartákn.</param>
+            <param name="language">Tungumál Wiki-kóða: WikiCodeLangage.Icelandic, WikiCodeLanguage.English, ...</param>
+            <returns>Wiki-kóða sem skýrir orðabókartákn sem koma fyrir í streng.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Generator.GetCurrentDocument(System.Xml.Linq.XElement,System.Xml.Linq.XDocument,System.Xml.Linq.XDocument)">
+            <summary>
+            Skilar XDocument-hlut sem viðkomandi stak tilheyrir.
+            </summary>
+            <param name="element">XElement-hlutur sem samsvarar viðkomandi staki.</param>
+            <param name="schema_document">Skema sem skilgreinir týpur Torg-þjónustu.</param>
+            <param name="common_schema_document">Skema sem skilgreinir samnýttar týpur Torg-þjónustu.</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:RB.Utils.WikiCodeGenerator.Helper.IndentXML(System.String,System.Collections.Generic.List{System.Tuple{System.String,System.String}})" -->
+        <member name="M:RB.Utils.WikiCodeGenerator.Helper.GetWikiCodeParts(System.String)">
+            <summary>
+            Skilar hlutum Wiki-kóða.
+            </summary>
+            <param name="code">Wiki-kóði.</param>
+            <returns>Listi af strengjum sem eru allir kaflar undir h1-tögum wiki-kóðans auk þess sem undan fyrsta h1-taginu kemur.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Helper.StripEnclosingTag(System.String,System.String)">
+            <summary>
+            Fjarlægir tag sem umlykur Wiki-kóða.
+            </summary>
+            <param name="code">Wiki-kóði.</param>
+            <param name="tag">Nafn tags sem skal fjarlægja.</param>
+            <returns>Wiki-kóði á tags.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Helper.PadWithTag(System.String,System.String)">
+            <summary>
+            Umlykur wiki-kóða með tagi.
+            </summary>
+            <param name="code">Wiki-kóði.</param>
+            <param name="tag">Nafn tags sem skal umlykja wiki-kóða..</param>
+            <returns>Wiki-kóði umlyktur tagi.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.Helper.MergePage(System.String,System.String)">
+            <summary>
+            Fléttar saman tveim Wiki-kóðum.
+            </summary>
+            <param name="generated_code">Wiki-kóði sem flétta skal saman við.</param>
+            <param name="current_code">Wiki-kóði sem fléttað</param>
+            <returns>Nýr samfléttaður wiki-kóði.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:RB.Utils.WikiCodeGenerator.WebServiceParser.GetSchemaFiles(System.String)" -->
+        <member name="M:RB.Utils.WikiCodeGenerator.WebServiceParser.FindReferencedFiles(System.String)">
+            <summary>
+            Skilar nöfnum allra skráa sem er vísað til í WSDL-skjali og undirskjölum þess (og undirskjölum þeirra o.s.frv.).
+            </summary>
+            <param name="file_name">Slóð WSDL-skjals.</param>
+            <returns>Listi slóða skjala sem er vísað til.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:RB.Utils.WikiCodeGenerator.WebServiceParser.GetOperations(System.String,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:RB.Utils.WikiCodeGenerator.WebServiceParser.GetOperationsWithMessages(System.String)" -->
+        <member name="M:RB.Utils.WikiCodeGenerator.WebServiceParser.GetMessages(System.String)">
+            <summary>
+            Skilar öllum þjónustuskilaboðum vefþjónustu.
+            </summary>
+            <param name="wsdl_document">Slóð á WSDL- eða skemakjal þjónustu (hvort heldur sem inniheldur þjónustuskilaboðaskilgreiningar)</param>
+            <returns></returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.WebServiceParser.GetServiceName(System.String)">
+            <summary>
+            Skilar nafni þjónustu.
+            </summary>
+            <param name="wsdl_document">WSDL-skjal þjónustu.</param>
+            <returns>Nafn þjónustu.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:RB.Utils.WikiCodeGenerator.WebServiceParser.GetMessages(System.String,System.String)" -->
+        <member name="M:RB.Utils.WikiCodeGenerator.WebServiceParser.GetPortTypeName(System.String)">
+            <summary>
+            Skilar nafni svokölluðu port-type þjónustu.
+            </summary>
+            <param name="wsdl_document">WSDL-skjal þjónustu.</param>
+            <returns>Nafni svokallaðs port-type þjónustu.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetMessageElements(System.Xml.Linq.XDocument,System.String)">
+            <summary>
+            Skilar lista XML-staka SOAP-skeytis.
+            </summary>
+            <param name="document">XDocument-hlutur sem inniheldur (meðal annars) viðkomandi SOAP-skeyti.</param>
+            <param name="message_name">Nafn SOAP-skeytis.</param>
+            <returns>Listi XElement-hluta sem samsvara stökum viðkomandi SOAP-skeytis.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetElements(System.Xml.Linq.XElement)" -->
+        <!-- Badly formed XML comment ignored for member "M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetElementDocumentation(System.Xml.Linq.XElement,System.String)" -->
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetElementOccurance(System.Xml.Linq.XElement)">
+            <summary>
+            Skilar viðveruskildu XML-staks (þ.e. minOccurs og maxOccurs).
+            </summary>
+            <param name="element">XML-stak.</param>
+            <returns>Viðveruskilda viðkomandi XML-staks.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetElementNillable(System.Xml.Linq.XElement)">
+            <summary>
+            Skilar innihaldsleysi XML-eigindis (þ.e. nillable).
+            </summary>
+            <param name="element">XML-eigindi.</param>
+            <returns>Innihaldsleysi viðkomandi XML-eigindis.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetAttributeOccurance(System.Xml.Linq.XElement)">
+            <summary>
+            Skilar viðveruskildu XML-eigindis (þ.e. use).
+            </summary>
+            <param name="element">XML-eigindi.</param>
+            <returns>Viðveruskilda viðkomandi XML-eigindis.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetMinimumElementOccurance(System.Xml.Linq.XElement)">
+            <summary>
+            Skilar lágmarks viðveruskildu XML-staks eða -eigindis (þ.e. minOccurs eða use).
+            </summary>
+            <param name="element">XML-stak eða -eigindi.</param>
+            <returns>Lágmarks viðveruskilda viðkomandi XML-staks eða -eigindis.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetMaximumElementOccurance(System.Xml.Linq.XElement)">
+            <summary>
+            Skilar hámarks viðveruskildu XML-staks eða -eigindis. (þ.e. maxnOccurs eða use).
+            </summary>
+            <param name="element">XML-stak eða -eigindi..</param>
+            <returns>Hámarks viðveruskilda viðkomandi XML-staks eða -eigindis. Ef stak hefur ekki hámarks viðveruskyldu er skilagildi 0.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetRestriction(System.Xml.Linq.XElement)">
+            <summary>
+            Skilar takmörkunum XML-staks (t.a.m. base, length, pattern, o.s.frv.).
+            </summary>
+            <param name="element">XML-stak.</param>
+            <returns>Takmarkanir viðkomandi XML-staks.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetPattern(System.Xml.Linq.XElement)">
+            <summary>
+            Skilar nauðsynlegu formi XML-staks (þ.e. gildi pattern-eigindis ef slíkt er tiltekið).
+            </summary>
+            <param name="element">XML-stak.</param>
+            <returns>Nauðsynlegt form viðkomandi XML-staks.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetBaseType(System.Xml.Linq.XElement)">
+            <summary>
+            Skilar grunntagi takmarkaðs XML-staks.
+            </summary>
+            <param name="element">XML-stak.</param>
+            <returns>Grunntag viðkomandi XML-staks.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetRestrictionWithoutBaseType(System.Xml.Linq.XElement)">
+            <summary>
+            Skilar takmörkunum XML-staks án grunntags (t.a.m. length, pattern, o.s.frv.).
+            </summary>
+            <param name="element">XML-stak.</param>
+            <returns>Takmarkanir viðkomandi XML-staks án grunntags.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetType(System.Xml.Linq.XElement,System.Xml.Linq.XDocument)">
+            <summary>
+            Skilar XML-staki týpu XML-staks.
+            </summary>
+            <param name="element">XML-stak.</param>
+            <param name="document">XDocument-hlutur sem inniheldur (meðal annars) viðkomandi týpu.</param>
+            <returns>XML-stak týpu viðkomandi XML-staks.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetType(System.String,System.Xml.Linq.XDocument)">
+            <summary>
+            Skilar XML-staki týpu XML-staks sem hefur tiltekið nafn.
+            </summary>
+            <param name="element">Nafn XML-staks.</param>
+            <param name="document">XDocument-hlutur sem inniheldur (meðal annars) viðkomandi týpu.</param>
+            <returns>XML-stak týpu viðkomandi XML-staks.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetEmbeddedType(System.Xml.Linq.XElement)">
+            <summary>
+            Skilar XML-staki innfeldrar týpu XML-staks.
+            </summary>
+            <param name="element">XML-stak.</param>
+            <returns>XML-stak týpu viðkomandi XML-staks.</returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetDescendants(System.Xml.Linq.XElement,System.Xml.Linq.XDocument)">
+            <summary>
+            Skilar afkomendum XML-staks (þ.e. þeim XML-stökum sem týpa viðkomandi XML-staks innheldur).
+            </summary>
+            <param name="element">XML-stak.</param>
+            <param name="document">XDocument-hlutur sem inniheldur (meðal annars) viðkomandi týpu.</param>
+            <returns>Listi XML-staka sem eru afkomendur viðkomandi XML-staks. 
+            Tegund XML-staka sem er skilað eru (í þessari röð): attribute, erfðagripir (extension úr base), element, choice. </returns>
+        </member>
+        <member name="M:RB.Utils.WikiCodeGenerator.XDocumentParser.GetEnumerators(System.Xml.Linq.XElement,System.String)">
+            <summary>
+            Skilar upptalningum XML-staks.
+            </summary>
+            <param name="type">XML-stak.</param>
+            <returns>Listi strengjapara þar sem fyrra stakið er nafn og seinna lýsing þess.</returns>
+            <param name="language">Tungumál Wiki-kóða: WikiCodeLangage.Icelandic, WikiCodeLanguage.English, ...</param>
+        </member>
+    </members>
+</doc>

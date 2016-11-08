@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RB.Utils.WikiCodeGenerator.WindowsApplication", "RB.Utils.WikiCodeGenerator.WindowsApplication\RB.Utils.WikiCodeGenerator.WindowsApplication.csproj", "{89EC2613-BEC0-4BA2-86F0-391C466F8C1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RB.Utils.WikiCodeGenerator.ConsoleApplication", "RB.Utils.WikiCodeGenerator.ConsoleApplication\RB.Utils.WikiCodeGenerator.ConsoleApplication.csproj", "{9C69613C-1FAF-486A-B280-74F266CF4C2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RB.Utils.WikiCodeGenerator", "..\RB.Utils.WikiCodeGenerator\RB.Utils.WikiCodeGenerator\RB.Utils.WikiCodeGenerator.csproj", "{39302059-8EDF-484E-842D-66DBC0CF69E9}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\RB.Utils.WikiCodeGenerator\\RB.Utils.WikiCodeGenerator\\RB.Utils.WikiCodeGenerator.csproj
+		SccProjectName1 = ../RB.Utils.WikiCodeGenerator/RB.Utils.WikiCodeGenerator
+		SccLocalPath1 = ..\\RB.Utils.WikiCodeGenerator\\RB.Utils.WikiCodeGenerator
+		SccProjectUniqueName2 = RB.Utils.WikiCodeGenerator.ConsoleApplication\\RB.Utils.WikiCodeGenerator.ConsoleApplication.csproj
+		SccProjectName2 = RB.Utils.WikiCodeGenerator.ConsoleApplication
+		SccLocalPath2 = RB.Utils.WikiCodeGenerator.ConsoleApplication
+		SccProjectUniqueName3 = RB.Utils.WikiCodeGenerator.WindowsApplication\\RB.Utils.WikiCodeGenerator.WindowsApplication.csproj
+		SccProjectName3 = RB.Utils.WikiCodeGenerator.WindowsApplication
+		SccLocalPath3 = RB.Utils.WikiCodeGenerator.WindowsApplication
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89EC2613-BEC0-4BA2-86F0-391C466F8C1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89EC2613-BEC0-4BA2-86F0-391C466F8C1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89EC2613-BEC0-4BA2-86F0-391C466F8C1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89EC2613-BEC0-4BA2-86F0-391C466F8C1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C69613C-1FAF-486A-B280-74F266CF4C2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C69613C-1FAF-486A-B280-74F266CF4C2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C69613C-1FAF-486A-B280-74F266CF4C2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C69613C-1FAF-486A-B280-74F266CF4C2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39302059-8EDF-484E-842D-66DBC0CF69E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39302059-8EDF-484E-842D-66DBC0CF69E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39302059-8EDF-484E-842D-66DBC0CF69E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39302059-8EDF-484E-842D-66DBC0CF69E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

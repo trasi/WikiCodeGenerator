@@ -1,0 +1,12 @@
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator.Clients\RB.Utils.WikiCodeGenerator.ConsoleApplication\bin\Release\WikiCodeGenerator.exe.config
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator.Clients\RB.Utils.WikiCodeGenerator.ConsoleApplication\bin\Release\WikiCodeGenerator.exe
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator.Clients\RB.Utils.WikiCodeGenerator.ConsoleApplication\bin\Release\WikiCodeGenerator.pdb
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator.Clients\RB.Utils.WikiCodeGenerator.ConsoleApplication\bin\Release\RB.Utils.WikiCodeGenerator.dll
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator.Clients\RB.Utils.WikiCodeGenerator.ConsoleApplication\bin\Release\ConfluenceSoapServiceService.dll
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator.Clients\RB.Utils.WikiCodeGenerator.ConsoleApplication\bin\Release\RB.BLL.Dictionary.dll
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator.Clients\RB.Utils.WikiCodeGenerator.ConsoleApplication\bin\Release\RB.Utils.WikiCodeGenerator.pdb
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator.Clients\RB.Utils.WikiCodeGenerator.ConsoleApplication\bin\Release\RB.Utils.WikiCodeGenerator.xml
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator.Clients\RB.Utils.WikiCodeGenerator.ConsoleApplication\bin\Release\RB.BLL.Dictionary.pdb
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator.Clients\RB.Utils.WikiCodeGenerator.ConsoleApplication\obj\Release\RB.Utils.WikiCodeGenerator.ConsoleApplication.csprojResolveAssemblyReference.cache
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator.Clients\RB.Utils.WikiCodeGenerator.ConsoleApplication\obj\Release\WikiCodeGenerator.exe
+E:\Workspace\RB.Utils\RB.Utils.WikiCodeGenerator.Clients\RB.Utils.WikiCodeGenerator.ConsoleApplication\obj\Release\WikiCodeGenerator.pdb

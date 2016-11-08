@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://rb.b2b.is/schema/accounts/2012/06/01" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pws="http://rb.b2b.is/schema/accounts/2012/06/01" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ct="http://rb.b2b.is/schema/commontypes/2012/06/01" xmlns:at="http://rb.b2b.is/schema/accounts/2012/06/01">
+  <xs:import namespace="http://rb.b2b.is/schema/commontypes/2012/06/01" schemaLocation="B2BTypes.xsd" />
+  <xs:include schemaLocation="B2BAccountTypes.xsd" />
+  <xs:element name="Echo">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EchoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="EchoInfo" type="ct:EchoInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAccountStatement">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Query" type="at:GetAccountStatementQuery" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAccountStatementResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="GetAccountStatementResult" type="at:GetAccountStatementResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAccountStatementDetail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Query" type="at:GetAccountStatementDetailQuery" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAccountStatementDetailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="GetAccountStatementDetailResult" type="at:GetAccountStatementDetailResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetValueDateBalance">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Query" type="at:GetValueDateBalanceQuery" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetValueDateBalanceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Result" type="at:GetValueDateBalanceResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAccounts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Query" type="at:GetAccountsQuery" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAccountsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="GetAccountsResult" type="at:GetAccountsResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserAccounts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Query" type="at:GetUserAccountsQuery" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserAccountsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="GetUserAccountsResult" type="at:GetUserAccountsResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAccount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Account" type="ct:AccountID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAccountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="AccountInfo" type="at:AccountInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDepositAccount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Query" type="at:DepositAccountQuery" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDepositAccountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="DepositAccountInfo" type="at:DepositAccountInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAccountDetail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Account" type="ct:AccountID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAccountDetailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="AccountDetailInfo" type="at:AccountDetailInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUnusedAccountIds">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Query" type="at:GetUnusedAccountIdsQuery" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUnusedAccountIdsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="GetUnusedAccountIdsResult" type="at:GetUnusedAccountIdsResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateAccount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="NewAccount" type="at:NewAccount" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateAccountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="CreateAccountResult" type="at:CreateAccountResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AlterAccount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Account" type="at:AlterAccount" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AlterAccountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="AlterAccountResult" type="at:AlterAccountResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPrintingFrequency">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Query" type="at:GetPrintingFrequencyQuery" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPrintingFrequencyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="GetPrintingFrequencyResult" type="at:GetPrintingFrequencyResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CustomFaultException">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="GeneralErrorText" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation xml:lang="en-US">Common error code across banking institutions.</xs:documentation>
+            <xs:documentation xml:lang="is-IS">Sameiginlegur villukóði sem er nýttur þvert á bankastofnair.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="GeneralErrorCode" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation xml:lang="en-US">Text to describe the GeneralErrorCode. E.g.: "Authentication failed", "Data could not be validated", etc.</xs:documentation>
+            <xs:documentation xml:lang="is-IS">Lýsing GeneralErrorText.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="BanksErrorText" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation xml:lang="en-US">Error code specific to the banking institution and the error instance. </xs:documentation>
+            <xs:documentation xml:lang="is-IS">Villukóði sértækur fyrir viðkomandi bankastofnun og villu.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="BanksErrorCode" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation xml:lang="en-US">Text to describe the BanksErrorCode and/or data to resolve or help troubleshoot problems between banking institutions.</xs:documentation>
+            <xs:documentation xml:lang="is-IS">Lýsing BanksErrorText.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="SessionID" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation xml:lang="en-US">A unique ID of the session in which the fault arose.</xs:documentation>
+            <xs:documentation xml:lang="is-IS">Einkvæmt einkenni setunnar þar sem villan átti tilurð.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

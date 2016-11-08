@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://rb.b2b.is/schema/batchpayments/2012/06/01"
+           xmlns:pt="http://rb.b2b.is/schema/batchpayments/2012/06/01"
+           xmlns:ct="http://rb.b2b.is/schema/commontypes/2012/06/01"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           id="CommonTypes">
+  <xs:import namespace="http://rb.b2b.is/schema/commontypes/2012/06/01" schemaLocation="B2BTypes.xsd"/>
+  <xs:include schemaLocation="B2BBatchPaymentsTypes.xsd"/>
+
+  <xs:element name="AddPayments">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="BatchId" type="ct:OperationID">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">ID of batch which to payments shall be added.</xs:documentation>
+            <xs:documentation xml:lang="is">Númer bunka sem skal bæta við greiðslum.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Payments" type="pt:DepositPayments">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Payments which should be added to batch.</xs:documentation>
+            <xs:documentation xml:lang="is">Greiðslur sem bæta skal við bunka.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="IsAdditionErrorImmune" type="xs:boolean">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Should payments be added despite errors?</xs:documentation>
+            <xs:documentation xml:lang="is">Skal bæta við greiðslum þrátt fyrir villur?</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddPaymentsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Result" type="pt:AddPaymentsResult"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="AlterBatch">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Batch" type="pt:Batch">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Batch which shall be altered.</xs:documentation>
+            <xs:documentation xml:lang="is">Bunki sem skal uppfæra.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AlterBatchResponse">
+    <xs:complexType>
+      <xs:sequence/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="AlterPayment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="BatchId" type="ct:OperationID">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">ID of the batch that contains the payment which shall be altered.</xs:documentation>
+            <xs:documentation xml:lang="is">Númer bunka sem innheldur greiðsluna sem skal uppfæra.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="PaymentId" type="ct:OperationID">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">ID of payment which shall be altered.</xs:documentation>
+            <xs:documentation xml:lang="is">Númer greiðslu sem skal uppfæra.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Payment" type="pt:DepositPayment">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Payment which shall be altered.</xs:documentation>
+            <xs:documentation xml:lang="is">Greiðsla sem skal uppfæra.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AlterPaymentResponse">
+    <xs:complexType>
+      <xs:sequence/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="CreateBatch">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Batch" type="pt:Batch">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Batch which shall be created.</xs:documentation>
+            <xs:documentation xml:lang="is">Bunki sem skal búa til.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="OwnerId" type="ct:PersonID">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">ID of the person owns the batch.</xs:documentation>
+            <xs:documentation xml:lang="is">Kennitala bunkaeiganda.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateBatchResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="BatchId" type="ct:OperationID">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">New batch's ID.</xs:documentation>
+            <xs:documentation xml:lang="is">Númer nýs bunka.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="CreateScheduleBatch">
+    <xs:complexType>
+      <!--?-->
+      <xs:sequence/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateScheduleBatchResponse">
+    <xs:complexType>
+      <!--?-->
+      <xs:sequence/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="DeleteBatch">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="BatchId" type="ct:OperationID">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">ID of batch which shall be deleted.</xs:documentation>
+            <xs:documentation xml:lang="is">Númer bunka sem skal eyða.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteBatchResponse">
+    <xs:complexType>
+      <xs:sequence/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="DeletePayment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="BatchId" type="ct:OperationID">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">ID of batch that contains the payment wich shall be deleted.</xs:documentation>
+            <xs:documentation xml:lang="is">Bunkanúmer.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="PaymentId" type="ct:OperationID">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">ID of payment which shall be deleted.</xs:documentation>
+            <xs:documentation xml:lang="is">Númer greiðslu sem skal eyða.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeletePaymentResponse">
+    <xs:complexType>
+      <xs:sequence/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Echo">
+    <xs:complexType>
+      <xs:sequence/>      
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EchoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="EchoInfo" type="ct:EchoInfo">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Echo.</xs:documentation>
+            <xs:documentation xml:lang="is">Bergmál.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="GetBatch">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Query" type="pt:GetBatchQuery">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Query for single batch retrieval.</xs:documentation>
+            <xs:documentation xml:lang="is">Fyrirspurn til þess að ná í stakan bunka.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBatchResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Batch" type="pt:BatchInfo">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Batch.</xs:documentation>
+            <xs:documentation xml:lang="is">Bunki.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="GetBatches">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Query" type="pt:GetBatchesQuery">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Query for multiple batch retrieval.</xs:documentation>
+            <xs:documentation xml:lang="is">Fyrirspurn til þess að ná í marga bunka.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBatchesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Batches" type="pt:Batches">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Batches.</xs:documentation>
+            <xs:documentation xml:lang="is">Bunkar.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="GetBatchStatistics">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Query" type="pt:GetBatchStatisticsQuery">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Query for batch statistics retrieval.</xs:documentation>
+            <xs:documentation xml:lang="is">Fyrirspurn til þess að ná í tölfræði bunka.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBatchStatisticsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="BatchStatisticsAndCharges" type="pt:BatchStatisticsAndCharges">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Batch statistics.</xs:documentation>
+            <xs:documentation xml:lang="is">Tölfræði bunka.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="GetPayment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Query" type="pt:GetPaymentQuery">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Query for single payment retrieval.</xs:documentation>
+            <xs:documentation xml:lang="is">Fyrirspurn til þess að ná í staka greiðslu.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="PaymentInfo" type="pt:DepositPaymentInfo">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Payment.</xs:documentation>
+            <xs:documentation xml:lang="is">Greiðsla.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ProcessBatch">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Batch" type="pt:Batch">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Batch which shall be processed.</xs:documentation>
+            <xs:documentation xml:lang="is">Bunki sem skal greiða.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProcessBatchResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ProcessBatchResult" type="pt:ProcessBatchResult">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Results of batch process.</xs:documentation>
+            <xs:documentation xml:lang="is">Niðurstöður bunkagreiðslu.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ReuseBatch">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="BatchId" type="ct:OperationID">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">ID of batch which is to be reused.</xs:documentation>
+            <xs:documentation xml:lang="is">Númer bunka sem skal endurnýta.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Name" type="pt:NameOfBatch">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">New batch's name.</xs:documentation>
+            <xs:documentation xml:lang="is">Nafn nýs bunka.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Reuse" type="pt:Reuse">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Categories of payments to reused in new batch.</xs:documentation>
+            <xs:documentation xml:lang="is">Greiðslutegundir sem skal endurnýta í nýja bunkanum.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="IsAmountReused" type="xs:boolean">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Should payment amounts also be reused?</xs:documentation>
+            <xs:documentation xml:lang="is">Skal endurnýta upphæðir greiðslna?</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReuseBatchResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="NewBatchId" type="ct:OperationID">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">New batch's ID.</xs:documentation>
+            <xs:documentation xml:lang="is">Bunkanúmer nýs bunka.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ValidateBatch">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="BatchId" type="ct:OperationID">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Batch ID.</xs:documentation>
+            <xs:documentation xml:lang="is">Bunkanúmer.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Payments" type="pt:DepositPayments">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Collection of payments</xs:documentation>
+            <xs:documentation xml:lang="is">Safn greiðslna.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ValidateBatchResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Result" type="pt:AddPaymentsResult">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Information about payments which resulted in errors.</xs:documentation>
+            <xs:documentation xml:lang="is">Upplýsingar um greiðslur sem ollu villum.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="CustomFaultException">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="GeneralErrorText" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation xml:lang="en-US">Common error code across banking institutions.</xs:documentation>
+            <xs:documentation xml:lang="is-IS">Sameiginlegur villukóði sem er nýttur þvert á bankastofnair.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="GeneralErrorCode" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation xml:lang="en-US">Text to describe the GeneralErrorCode. E.g.: "Authentication failed", "Data could not be validated", etc.</xs:documentation>
+            <xs:documentation xml:lang="is-IS">Lýsing GeneralErrorText.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="BanksErrorText" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation xml:lang="en-US">Error code specific to the banking institution and the error instance. </xs:documentation>
+            <xs:documentation xml:lang="is-IS">Villukóði sértækur fyrir viðkomandi bankastofnun og villu.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="BanksErrorCode" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation xml:lang="en-US">Text to describe the BanksErrorCode and/or data to resolve or help troubleshoot problems between banking institutions.</xs:documentation>
+            <xs:documentation xml:lang="is-IS">Lýsing BanksErrorText.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="SessionID" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation xml:lang="en-US">A unique ID of the session in which the fault arose.</xs:documentation>
+            <xs:documentation xml:lang="is-IS">Einkvæmt einkenni setunnar þar sem villan átti tilurð.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
